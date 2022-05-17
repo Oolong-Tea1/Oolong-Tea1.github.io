@@ -1,22 +1,105 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://Oolong-Tea1.github.io</id>
-    <title>OolongTea</title>
-    <updated>2022-05-17T03:20:54.389Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://Oolong-Tea1.github.io"/>
-    <link rel="self" href="https://Oolong-Tea1.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
-    <logo>https://Oolong-Tea1.github.io/images/avatar.png</logo>
-    <icon>https://Oolong-Tea1.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2022, OolongTea</rights>
-    <entry>
-        <title type="html"><![CDATA[Mybatis学习日记：解决：找不到配置文件问题]]></title>
-        <id>https://Oolong-Tea1.github.io/post/mybatis-xue-xi-ri-ji-jie-jue-zhao-bu-dao-pei-zhi-wen-jian-wen-ti/</id>
-        <link href="https://Oolong-Tea1.github.io/post/mybatis-xue-xi-ri-ji-jie-jue-zhao-bu-dao-pei-zhi-wen-jian-wen-ti/">
-        </link>
-        <updated>2022-05-17T03:13:58.000Z</updated>
-        <content type="html"><![CDATA[<p>今天在配置Mybatis环境时遇到了些问题，主要还是找不到配置文件的问题</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Mybatis学习日记：解决：找不到配置文件问题 | OolongTea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://Oolong-Tea1.github.io/favicon.ico?v=1652757641093">
+<link rel="stylesheet" href="https://Oolong-Tea1.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="今天在配置Mybatis环境时遇到了些问题，主要还是找不到配置文件的问题
+!
+上面是我的文件目录
+问题一：找不到主要配置文件 mybatis-config.xml
+
+上图使用了绝对路径来获取配置文件，从图中可以看到我们并不能这样子获取到配置..." />
+    <meta name="keywords" content="MyBatis" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://Oolong-Tea1.github.io">
+        <img src="https://Oolong-Tea1.github.io/images/avatar.png?v=1652757641093" class="site-logo">
+        <h1 class="site-title">OolongTea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://Oolong-Tea1.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Mybatis学习日记：解决：找不到配置文件问题</h2>
+            <div class="post-date">2022-05-17</div>
+            
+            <div class="post-content" v-pre>
+              <p>今天在配置Mybatis环境时遇到了些问题，主要还是找不到配置文件的问题</p>
 <p><img src="C:\Users\mr\Desktop\Blog\Images\微信图片_20220517085119.png" alt="微信图片_20220517085119" style="zoom: 50%;" />!</p>
 <p>上面是我的文件目录</p>
 <h4 id="问题一找不到主要配置文件-mybatis-configxml">问题一：找不到主要配置文件 mybatis-config.xml</h4>
@@ -52,6 +135,45 @@
 <p><img src="C:\Users\mr\AppData\Roaming\Typora\typora-user-images\image-20220517103123253.png" alt="image-20220517103123253" style="zoom: 67%;" />         <img src="C:%5CUsers%5Cmr%5CDesktop%5CBlog%5CImages%5C%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220517103440.png" alt="" loading="lazy"></p>
 <p>​			如果存放的mapper文件的包名有xxx.xxx.xxx类似的结构，需要在创建目录时用以下格式创建</p>
 <img src="C:\Users\mr\AppData\Roaming\Typora\typora-user-images\image-20220517103019682.png" alt="image-20220517103019628" style="zoom:67%;"/>
-]]></content>
-    </entry>
-</feed>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://Oolong-Tea1.github.io/tag/1G4IjjfUL/" class="tag">
+                    MyBatis
+                  </a>
+                
+              </div>
+            
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
