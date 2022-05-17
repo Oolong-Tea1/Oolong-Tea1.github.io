@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://Oolong-Tea1.github.io/favicon.ico?v=1652768809001">
+<link rel="shortcut icon" href="https://Oolong-Tea1.github.io/favicon.ico?v=1652769588390">
 <link rel="stylesheet" href="https://Oolong-Tea1.github.io/styles/main.css">
 
 
@@ -33,7 +33,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://Oolong-Tea1.github.io">
-        <img src="https://Oolong-Tea1.github.io/images/avatar.png?v=1652768809001" class="site-logo">
+        <img src="https://Oolong-Tea1.github.io/images/avatar.png?v=1652769588390" class="site-logo">
         <h1 class="site-title">OolongTea</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -100,21 +100,21 @@
             
             <div class="post-content" v-pre>
               <p>今天在配置Mybatis环境时遇到了些问题，主要还是找不到配置文件的问题</p>
-<p><img src="C:\Users\mr\Desktop\Blog\Images\微信图片_20220517085119.png" alt="微信图片_20220517085119" style="zoom: 50%;" />!<img src="https://Oolong-Tea1.github.io/post-images/1652768715842.png" alt="" loading="lazy"></p>
+<p>!<img src="https://Oolong-Tea1.github.io/post-images/1652768715842.png" alt="" loading="lazy"></p>
 <p>上面是我的文件目录</p>
-<h4 id="问题一找不到主要配置文件-mybatis-configxml">问题一：找不到主要配置文件 mybatis-config.xml</h4>
-<img src="C:\Users\mr\Desktop\Blog\Images\微信图片_20220517090309.png" style="zoom:33%" />
+<h2 id="问题一找不到主要配置文件-mybatis-configxml">问题一：找不到主要配置文件 mybatis-config.xml</h2>
+<figure data-type="image" tabindex="1"><img src="https://Oolong-Tea1.github.io/post-images/1652769052908.png" alt="" loading="lazy"></figure>
 <p>上图使用了绝对路径来获取配置文件，从图中可以看到我们并不能这样子获取到配置文件</p>
 <p><strong>那我们应该怎么解决呢？</strong></p>
-<p>只要把绝对路径改成文件名，也就是&quot;<strong>mybatis-config.xm</strong>l&quot;即可<img src="C:\Users\mr\Desktop\Blog\Images\微信图片_20220517101452.png" alt="微信图片_20220517101452" style="zoom: 33%;" /></p>
-<h4 id="问题二找不到映射文件">问题二：找不到映射文件</h4>
-<h5 id="原因一mybatis-configxml配置文件中的mapper-resource配置映射文件时路径写错了-img-srccusersmrdesktopblogimages微信图片_20220517100327png-alt微信图片_20220517100327-stylezoom-33">原因一：mybatis-config.xml配置文件中的**<mapper resource>**配置映射文件时路径写错了																																															        <img src="C:\Users\mr\Desktop\Blog\Images\微信图片_20220517100327.png" alt="微信图片_20220517100327" style="zoom: 33%;" /></h5>
+<p>只要把绝对路径改成文件名，也就是&quot;<strong>mybatis-config.xm</strong>l&quot;即可<img src="https://Oolong-Tea1.github.io/post-images/1652769075160.png" alt="" loading="lazy"></p>
+<h2 id="问题二找不到映射文件">问题二：找不到映射文件</h2>
+<h3 id="原因一mybatis-configxml配置文件中的mapper-resource配置映射文件时路径写错了">原因一：mybatis-config.xml配置文件中的**<mapper resource>**配置映射文件时路径写错了																		<img src="https://Oolong-Tea1.github.io/post-images/1652769115078.png" alt="" loading="lazy"></h3>
 <p>​		查了一下Mybatis官网，将路径改成下面这种形式就好了</p>
-<img src="C:\Users\mr\Desktop\Blog\Images\微信图片_202205171003272.png" alt="微信图片_202205171003272" style="zoom: 50%;" />	
-<img src="C:\Users\mr\Desktop\Blog\Images\微信图片_202205171003273.png" alt="微信图片_202205171003273" style="zoom: 33%;" />	
-<h5 id="原因二映射文件和mapper文件不在同一个资源包下面">原因二：映射文件和mapper文件不在同一个资源包下面</h5>
-<h6 id="解决一可以将xml文件和mapper文件放在java文件夹下的mapper包中如下图所示">解决一：可以将xml文件和mapper文件放在java文件夹下的Mapper包中，如下图所示</h6>
-<p>​							<img src="C:\Users\mr\Desktop\Blog\Images\微信图片_202205171003275.png" alt="微信图片_202205171003275" style="zoom: 50%;" />									<img src="C:%5CUsers%5Cmr%5CDesktop%5CBlog%5CImages%5C%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_202205171003276.png" alt="" loading="lazy"></p>
+<p><img src="https://Oolong-Tea1.github.io/post-images/1652769151258.png" alt="" loading="lazy"><br>
+<img src="https://Oolong-Tea1.github.io/post-images/1652769161589.png" alt="" loading="lazy"></p>
+<h3 id="原因二映射文件和mapper文件不在同一个资源包下面">原因二：映射文件和mapper文件不在同一个资源包下面</h3>
+<p>####解决一：可以将xml文件和mapper文件放在java文件夹下的Mapper包中，如下图所示</p>
+<p>​							<img src="https://Oolong-Tea1.github.io/post-images/1652769240523.png" alt="" loading="lazy"></p>
 <p>再在pom.xml文件中添加上这串配置</p>
 <pre><code class="language-Java">&lt;build&gt;
     &lt;resources&gt;
@@ -128,13 +128,14 @@
 &lt;/build&gt;
 </code></pre>
 <p>​	就可以成功运行了</p>
-<h6 id="解决二将映射文件放到resource包下">解决二：将映射文件放到resource包下</h6>
+<h4 id="解决二将映射文件放到resource包下">解决二：将映射文件放到resource包下</h4>
 <p>​		将映射文件和mapper文件放在一起虽然能解决问题，但是也存在问题。就是如果在工程中，这样子并不美观且很难维护。</p>
-<p>​		在resource包下创建一个目录，目录名要与java包下存放mapper文件的包名一致，像我下面这样子。</p>
-<p>​				Tip：可以在target包下的classes下查看mapper文件和映射文件有没有在同一个目录下。</p>
-<p><img src="C:\Users\mr\AppData\Roaming\Typora\typora-user-images\image-20220517103123253.png" alt="image-20220517103123253" style="zoom: 67%;" />         <img src="C:%5CUsers%5Cmr%5CDesktop%5CBlog%5CImages%5C%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220517103440.png" alt="" loading="lazy"></p>
+<p>​		在resource包下创建一个目录，目录名要与java包下存放mapper文件的包名一致，像我下面这样子。<br>
+<img src="https://Oolong-Tea1.github.io/post-images/1652769382448.png" alt="" loading="lazy"><br>
+​				Tip：可以在target包下的classes下查看mapper文件和映射文件有没有在同一个目录下。<br>
+<img src="https://Oolong-Tea1.github.io/post-images/1652769340896.png" alt="" loading="lazy"></p>
 <p>​			如果存放的mapper文件的包名有xxx.xxx.xxx类似的结构，需要在创建目录时用以下格式创建</p>
-<img src="C:\Users\mr\AppData\Roaming\Typora\typora-user-images\image-20220517103019682.png" alt="image-20220517103019628" style="zoom:67%;"/>
+<figure data-type="image" tabindex="2"><img src="https://Oolong-Tea1.github.io/post-images/1652769312683.png" alt="" loading="lazy"></figure>
 
             </div>
             
