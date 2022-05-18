@@ -1,22 +1,103 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://Oolong-Tea1.github.io</id>
-    <title>OolongTea</title>
-    <updated>2022-05-18T10:29:58.441Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://Oolong-Tea1.github.io"/>
-    <link rel="self" href="https://Oolong-Tea1.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
-    <logo>https://Oolong-Tea1.github.io/images/avatar.png</logo>
-    <icon>https://Oolong-Tea1.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2022, OolongTea</rights>
-    <entry>
-        <title type="html"><![CDATA[MayBatis学习日记：增删改查]]></title>
-        <id>https://Oolong-Tea1.github.io/post/maybatis-xue-xi-ri-ji-zeng-shan-gai-cha/</id>
-        <link href="https://Oolong-Tea1.github.io/post/maybatis-xue-xi-ri-ji-zeng-shan-gai-cha/">
-        </link>
-        <updated>2022-05-18T10:20:45.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="一-查">一、查：</h3>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>MayBatis学习日记：增删改查 | OolongTea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://Oolong-Tea1.github.io/favicon.ico?v=1652869762028">
+<link rel="stylesheet" href="https://Oolong-Tea1.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="一、查：
+1、resultMap:
+&lt;mapper namespace=&quot;Mapper.BrandMapper&quot;&gt;
+    &lt;select id=&quot;selectAll&quot; result..." />
+    <meta name="keywords" content="Java,Javaweb,MyBatis" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://Oolong-Tea1.github.io">
+        <img src="https://Oolong-Tea1.github.io/images/avatar.png?v=1652869762028" class="site-logo">
+        <h1 class="site-title">OolongTea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://Oolong-Tea1.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">MayBatis学习日记：增删改查</h2>
+            <div class="post-date">2022-05-18</div>
+            
+            <div class="post-content" v-pre>
+              <h3 id="一-查">一、查：</h3>
 <h4 id="1-resultmap">1、resultMap:</h4>
 <pre><code class="language-java">&lt;mapper namespace=&quot;Mapper.BrandMapper&quot;&gt;
     &lt;select id=&quot;selectAll&quot; resultType=&quot;pojo.Brand&quot;&gt;
@@ -264,51 +345,62 @@ public void deleteById() throws Exception{
 原来是因为忘了<strong>加上@Param注解</strong>，加上注解再跑一次</p>
 <figure data-type="image" tabindex="6"><img src="https://Oolong-Tea1.github.io/post-images/1652869648156.png" alt="" loading="lazy"></figure>
 <p>加上注解后就成功跑起来了，没有改变的行数是因为表里已经没有这些数据了，所以返回0.</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Mybatis学习日记：解决：找不到配置文件问题]]></title>
-        <id>https://Oolong-Tea1.github.io/post/mybatis-xue-xi-ri-ji-jie-jue-zhao-bu-dao-pei-zhi-wen-jian-wen-ti/</id>
-        <link href="https://Oolong-Tea1.github.io/post/mybatis-xue-xi-ri-ji-jie-jue-zhao-bu-dao-pei-zhi-wen-jian-wen-ti/">
-        </link>
-        <updated>2022-05-17T03:13:58.000Z</updated>
-        <content type="html"><![CDATA[<p>今天在配置Mybatis环境时遇到了些问题，主要还是找不到配置文件的问题</p>
-<p>!<img src="https://Oolong-Tea1.github.io/post-images/1652768715842.png" alt="" loading="lazy"></p>
-<p>上面是我的文件目录</p>
-<h2 id="问题一找不到主要配置文件-mybatis-configxml">问题一：找不到主要配置文件 mybatis-config.xml</h2>
-<figure data-type="image" tabindex="1"><img src="https://Oolong-Tea1.github.io/post-images/1652769052908.png" alt="" loading="lazy"></figure>
-<p>上图使用了绝对路径来获取配置文件，从图中可以看到我们并不能这样子获取到配置文件</p>
-<p><strong>那我们应该怎么解决呢？</strong></p>
-<p>只要把绝对路径改成文件名，也就是&quot;<strong>mybatis-config.xm</strong>l&quot;即可<img src="https://Oolong-Tea1.github.io/post-images/1652769075160.png" alt="" loading="lazy"></p>
-<h2 id="问题二找不到映射文件">问题二：找不到映射文件</h2>
-<h3 id="原因一mybatis-configxml配置文件中的mapper-resource配置映射文件时路径写错了">原因一：mybatis-config.xml配置文件中的**<mapper resource>**配置映射文件时路径写错了																		<img src="https://Oolong-Tea1.github.io/post-images/1652769115078.png" alt="" loading="lazy"></h3>
-<p>​		查了一下Mybatis官网，将路径改成下面这种形式就好了</p>
-<p><img src="https://Oolong-Tea1.github.io/post-images/1652769151258.png" alt="" loading="lazy"><br>
-<img src="https://Oolong-Tea1.github.io/post-images/1652769161589.png" alt="" loading="lazy"></p>
-<h3 id="原因二映射文件和mapper文件不在同一个资源包下面">原因二：映射文件和mapper文件不在同一个资源包下面</h3>
-<p>####解决一：可以将xml文件和mapper文件放在java文件夹下的Mapper包中，如下图所示</p>
-<p>​							<img src="https://Oolong-Tea1.github.io/post-images/1652769240523.png" alt="" loading="lazy"></p>
-<p>再在pom.xml文件中添加上这串配置</p>
-<pre><code class="language-Java">&lt;build&gt;
-    &lt;resources&gt;
-        &lt;resource&gt;
-            &lt;directory&gt;src/main/java&lt;/directory&gt;
-            &lt;includes&gt;
-                &lt;include&gt;**/*.xml&lt;/include&gt;
-            &lt;/includes&gt;
-        &lt;/resource&gt;
-    &lt;/resources&gt;
-&lt;/build&gt;
-</code></pre>
-<p>​	就可以成功运行了</p>
-<h4 id="解决二将映射文件放到resource包下">解决二：将映射文件放到resource包下</h4>
-<p>​		将映射文件和mapper文件放在一起虽然能解决问题，但是也存在问题。就是如果在工程中，这样子并不美观且很难维护。</p>
-<p>​		在resource包下创建一个目录，目录名要与java包下存放mapper文件的包名一致，像我下面这样子。<br>
-<img src="https://Oolong-Tea1.github.io/post-images/1652769382448.png" alt="" loading="lazy"><br>
-​				Tip：可以在target包下的classes下查看mapper文件和映射文件有没有在同一个目录下。<br>
-<img src="https://Oolong-Tea1.github.io/post-images/1652769340896.png" alt="" loading="lazy"></p>
-<p>​			如果存放的mapper文件的包名有xxx.xxx.xxx类似的结构，需要在创建目录时用以下格式创建</p>
-<figure data-type="image" tabindex="2"><img src="https://Oolong-Tea1.github.io/post-images/1652769312683.png" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-</feed>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://Oolong-Tea1.github.io/tag/B2xwY8tzi/" class="tag">
+                    Java
+                  </a>
+                
+                  <a href="https://Oolong-Tea1.github.io/tag/sJXhIaEAA/" class="tag">
+                    Javaweb
+                  </a>
+                
+                  <a href="https://Oolong-Tea1.github.io/tag/1G4IjjfUL/" class="tag">
+                    MyBatis
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://Oolong-Tea1.github.io/post/mybatis-xue-xi-ri-ji-jie-jue-zhao-bu-dao-pei-zhi-wen-jian-wen-ti/">
+                  <h3 class="post-title">
+                    Mybatis学习日记：解决：找不到配置文件问题
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
