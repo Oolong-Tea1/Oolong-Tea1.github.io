@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Oolong-Tea1.github.io</id>
     <title>OolongTea</title>
-    <updated>2022-05-19T14:25:20.548Z</updated>
+    <updated>2022-05-19T15:25:58.184Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Oolong-Tea1.github.io"/>
     <link rel="self" href="https://Oolong-Tea1.github.io/atom.xml"/>
@@ -35,23 +35,23 @@
     
 &lt;/script&gt;
 </code></pre>
-<p>​			<strong>Tip：导入外部js的文件中不能包含<script>标签</strong></p>
-<p>​						<strong>且导入时html文件中的<script>标签不能自闭合</strong></p>
-<p>​	<strong>一般</strong>会把<script>标签<strong>放在<body>标签的最下面</strong>，js是脚本语言，所以为了用户的体验感受，会优先加载出页面的	基本内容，再加载动态信息，所以优先把<script>标签放在<body>标签的最下面。但是如果网页的js文件是全局定义且后期不怎么修改的，<strong>也可以放在<html>标签中</strong>。</p>
+<p>​			<strong>Tip：导入外部js的文件中不能包含script标签</strong></p>
+<p>​						<strong>且导入时html文件中的script标签不能自闭合</strong></p>
+<p>​	<strong>一般</strong>会把script标签<strong>放在<body>标签的最下面</strong>，js是脚本语言，所以为了用户的体验感受，会优先加载出页面的	基本内容，再加载动态信息，所以优先把script标签放在<body>标签的最下面。但是如果网页的js文件是全局定义且后期不怎么修改的，<strong>也可以放在<html>标签中</strong>。</p>
 <h3 id="二基本语法">二：基本语法</h3>
 <h4 id="1-输出语句">1、输出语句</h4>
 <pre><code>window.alert(&quot;Hello Javascript&quot;);//写入警告框
 document.write(&quot;Hello Javascript&quot;);//写入Html
 console.log(&quot;Hello Javascript&quot;);//写入控制台
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5Cmr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220519190126871.png" alt="image-20220519190126871" loading="lazy"></figure>
-<figure data-type="image" tabindex="2"><img src="C:%5CUsers%5Cmr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220519190140451.png" alt="image-20220519190140451" loading="lazy"></figure>
-<figure data-type="image" tabindex="3"><img src="C:%5CUsers%5Cmr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220519190149270.png" alt="image-20220519190149270" loading="lazy"></figure>
-<p>​		Tip：<script> 中语句结尾的分号可以删掉。</p>
+<figure data-type="image" tabindex="1"><img src="https://Oolong-Tea1.github.io/post-images/1652973841293.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://Oolong-Tea1.github.io/post-images/1652973854232.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://Oolong-Tea1.github.io/post-images/1652973865465.png" alt="" loading="lazy"></figure>
+<p>​		Tip：script标签 中语句结尾的分号可以删掉。</p>
 <h4 id="2-变量">2、变量：</h4>
 <p>​	2.1、js里面有<strong>var</strong>来申明变量，var变量可以<strong>存放不同类型的值</strong>。</p>
 <p>​	2.2、变量名的规则与<strong>java一致</strong>。</p>
-<p>​	2.3、ECMAscript6 新增了<strong>let</strong>关键字来定义变量，用法类似var，声明的变量只在let关键字所在的代码快生效，且<strong>不			允许重复声明</strong>。</p>
+<p>​	2.3、ECMAscript6 新增了<strong>let</strong>关键字来定义变量，用法类似var，声明的变量只在let关键字所在的代码快生效，且<strong>不允许重复声明</strong>。</p>
 <p>​	2.4、ECMAscript6 新增了<strong>const</strong>关键字，用来声明一个只读的变量，一旦声明，变量的值就<strong>不能改变</strong>。</p>
 <h4 id="3-数据类型">3、数据类型：</h4>
 <p>​	3.1、原始类型</p>
@@ -162,7 +162,7 @@ let result = add(1,2,3,4)
 </code></pre>
 <h3 id="三-对象">三、对象</h3>
 <p>​	参考手册：<a href="https://www.w3school.com.cn/js/js_objects.asp">JavaScript 对象 (w3school.com.cn)</a></p>
-<figure data-type="image" tabindex="4"><img src="C:%5CUsers%5Cmr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220519201350181.png" alt="image-20220519201350181" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://Oolong-Tea1.github.io/post-images/1652973880149.png" alt="" loading="lazy"></figure>
 <h4 id="31-array">3.1、Array</h4>
 <h5 id="a-定义和访问">a、定义和访问：</h5>
 <pre><code>//方式一
