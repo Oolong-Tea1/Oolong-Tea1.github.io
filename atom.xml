@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Oolong-Tea1.github.io</id>
     <title>OolongTea</title>
-    <updated>2022-05-19T02:00:28.410Z</updated>
+    <updated>2022-05-19T14:25:20.548Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Oolong-Tea1.github.io"/>
     <link rel="self" href="https://Oolong-Tea1.github.io/atom.xml"/>
@@ -10,6 +10,313 @@
     <logo>https://Oolong-Tea1.github.io/images/avatar.png</logo>
     <icon>https://Oolong-Tea1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, OolongTea</rights>
+    <entry>
+        <title type="html"><![CDATA[Javascript学习日记：基础语法、对象、BOM、DOM、事件监听]]></title>
+        <id>https://Oolong-Tea1.github.io/post/javascript-xue-xi-ri-ji-ji-chu-yu-fa-dui-xiang-bomdomshi-jian-jian-ting/</id>
+        <link href="https://Oolong-Tea1.github.io/post/javascript-xue-xi-ri-ji-ji-chu-yu-fa-dui-xiang-bomdomshi-jian-jian-ting/">
+        </link>
+        <updated>2022-05-19T14:22:36.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="一-基础语法">一、基础语法</h3>
+<h4 id="如何引入">如何引入</h4>
+<p>​		Javascript有两种引入方式，</p>
+<h5 id="第一种直接在html文件中加入script标签">第一种：直接在html文件中加入script标签</h5>
+<p>​				像这样子</p>
+<pre><code>&lt;body&gt;
+
+&lt;script&gt;
+    alert(&quot;Hello Javascript&quot;);
+&lt;/script&gt;
+
+
+&lt;/body&gt;
+</code></pre>
+<h5 id="第二种在外部包写js文件在html文件中导入js文件">第二种：在外部包写js文件，在html文件中导入js文件</h5>
+<pre><code>&lt;script src=&quot;../js/Demo.js&quot;&gt;
+    
+&lt;/script&gt;
+</code></pre>
+<p>​			<strong>Tip：导入外部js的文件中不能包含<script>标签</strong></p>
+<p>​						<strong>且导入时html文件中的<script>标签不能自闭合</strong></p>
+<p>​	<strong>一般</strong>会把<script>标签<strong>放在<body>标签的最下面</strong>，js是脚本语言，所以为了用户的体验感受，会优先加载出页面的	基本内容，再加载动态信息，所以优先把<script>标签放在<body>标签的最下面。但是如果网页的js文件是全局定义且后期不怎么修改的，<strong>也可以放在<html>标签中</strong>。</p>
+<h3 id="二基本语法">二：基本语法</h3>
+<h4 id="1-输出语句">1、输出语句</h4>
+<pre><code>window.alert(&quot;Hello Javascript&quot;);//写入警告框
+document.write(&quot;Hello Javascript&quot;);//写入Html
+console.log(&quot;Hello Javascript&quot;);//写入控制台
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5Cmr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220519190126871.png" alt="image-20220519190126871" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="C:%5CUsers%5Cmr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220519190140451.png" alt="image-20220519190140451" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="C:%5CUsers%5Cmr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220519190149270.png" alt="image-20220519190149270" loading="lazy"></figure>
+<p>​		Tip：<script> 中语句结尾的分号可以删掉。</p>
+<h4 id="2-变量">2、变量：</h4>
+<p>​	2.1、js里面有<strong>var</strong>来申明变量，var变量可以<strong>存放不同类型的值</strong>。</p>
+<p>​	2.2、变量名的规则与<strong>java一致</strong>。</p>
+<p>​	2.3、ECMAscript6 新增了<strong>let</strong>关键字来定义变量，用法类似var，声明的变量只在let关键字所在的代码快生效，且<strong>不			允许重复声明</strong>。</p>
+<p>​	2.4、ECMAscript6 新增了<strong>const</strong>关键字，用来声明一个只读的变量，一旦声明，变量的值就<strong>不能改变</strong>。</p>
+<h4 id="3-数据类型">3、数据类型：</h4>
+<p>​	3.1、原始类型</p>
+<ul>
+<li>number</li>
+<li>string</li>
+<li>boolean</li>
+<li>null</li>
+<li>undefined</li>
+</ul>
+<p>​		Tip:可以使用<strong>typeof运算符</strong>获取数据类型</p>
+<h4 id="4-运算符">4、运算符</h4>
+<p>​	区分“<mark>”和“</mark>=”：</p>
+<p>​		“==”：判断类型是否一致，如果不一致就进行类型转换，再对值进行比较</p>
+<p>​		“===”：判断类型是否一致，如果不一致直接返回false，再对值进行比较</p>
+<h4 id="5-类型转换">5、类型转换：</h4>
+<h5 id="51-其他类型转为number">5.1、其他类型转为Number</h5>
+<ul>
+<li>
+<p>string ：按照字符串的字面值，转为数字，如果字符串的字面值不是数字，则返回NaN，一般使用					parseInt</p>
+<ul>
+<li>boolean ：true转为1，其他转为0</li>
+</ul>
+</li>
+</ul>
+<h5 id="52-其他类型转为boolean">5.2、其他类型转为boolean</h5>
+<ul>
+<li>number:0和NaN转为false，其他转为true</li>
+<li>string:空字符串转为false，其他转为true</li>
+<li>null:false</li>
+<li>undefined:false</li>
+</ul>
+<h4 id="6-流程控制语句">6、流程控制语句</h4>
+<pre><code>//if
+var count = 3;
+if (count == 3){
+    alert(count);
+}
+
+//switch
+var num = 3;
+switch (num){
+    case 1:{
+        alert('今天是星期一')
+        break;
+    }
+    case 2:{
+        alert('今天是星期二')
+        break;
+    }case 3:{
+        alert('今天是星期三')
+        break;
+    }case 4:{
+        alert('今天是星期四')
+        break;
+    }case 5:{
+        alert('今天是星期五')
+        break;
+    }case 6:{
+        alert('今天是星期六')
+        break;
+    }case 7:{
+        alert('今天是星期日')
+        break;
+    }
+    default:alert('输入信息有误');
+}
+
+//for
+var sum = 0;
+for (let i = 0 ; i &lt;= 100 ; i++){
+    sum += i;
+}
+alert(sum);
+
+//while
+var sum = 0;
+var i = 1;
+while (i &lt;= 100){
+    sum += i;
+    i++;
+}
+alert(sum);
+
+//do...while
+var sum = 0;
+var i = 1;
+do {
+    sum += i;
+    i++;
+}while (i &lt;= 100);
+alert(sum);
+</code></pre>
+<h4 id="7-函数">7、函数</h4>
+<h5 id="71-定义函数">7.1、定义函数</h5>
+<pre><code>function add(a,b){
+    return a+b;
+}
+let result = add(1,2)
+</code></pre>
+<p>注意：<strong>形式参数不需要类型</strong>，返回值也不需要定义类型，可以在函数内部<strong>直接使用return</strong>即可</p>
+<pre><code>var add = function (a,b){
+    return a+b;
+}
+// let result = add(1,2)
+//在js中调用函数可以传入任意个参数，传进几个就使用几个，超出定义时的参数个数，超过的部分也不会干涉原本的程序运行。
+let result = add(1,2,3,4)
+</code></pre>
+<h3 id="三-对象">三、对象</h3>
+<p>​	参考手册：<a href="https://www.w3school.com.cn/js/js_objects.asp">JavaScript 对象 (w3school.com.cn)</a></p>
+<figure data-type="image" tabindex="4"><img src="C:%5CUsers%5Cmr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220519201350181.png" alt="image-20220519201350181" loading="lazy"></figure>
+<h4 id="31-array">3.1、Array</h4>
+<h5 id="a-定义和访问">a、定义和访问：</h5>
+<pre><code>//方式一
+var arr = new Array(1,2,3)
+alert(arr[0]);
+//方式二
+var arr2 = [1,2,3];
+alert(arr[0]);
+arr2[0] = 10;
+alert(arr[0]);
+</code></pre>
+<h5 id="b-属性length">b、属性：length</h5>
+<pre><code>var arr4 = [1,2,3];
+for (let i = 0; i &lt; arr4.length; i++) {
+    alert(arr4[i])
+}
+</code></pre>
+<h5 id="c-方法">c、方法</h5>
+<ul>
+<li>
+<p>push</p>
+<pre><code>arr4.push(10);
+alert(arr4);
+</code></pre>
+</li>
+<li>
+<p>splice</p>
+<pre><code>arr4.splice(0,1);//从0开始，删除一个
+alert(arr4)
+</code></pre>
+</li>
+</ul>
+<h4 id="32-string">3.2、String</h4>
+<h5 id="a-定义和方法">a、定义和方法</h5>
+<pre><code>var str1 = new String('abc');
+
+var str2 = 'abc';
+var str3 = &quot;abc&quot;;
+</code></pre>
+<h5 id="b-属性">b、属性</h5>
+<pre><code>alert(str3.length);
+</code></pre>
+<h5 id="c-方法-2">c、方法</h5>
+<pre><code>var str4 = '    abc     ';
+alert(1 + str4 + 1);
+alert(1 + str4.trim() + 1);
+</code></pre>
+<h4 id="33-其他对象">3.3、其他对象</h4>
+<pre><code>var person = {
+  name:&quot;ZhangSan&quot;,
+    age:23,
+    eat:function (){
+      alert(&quot;吃饭&quot;);
+    }
+}
+
+alert(person.name);
+alert(person.age);
+person.eat()
+</code></pre>
+<h3 id="四-bom">四、BOM</h3>
+<h4 id="41-window">4.1、Window</h4>
+<ul>
+<li>方法</li>
+</ul>
+<pre><code>//alert
+window.alert('abc');
+alert('abc');
+
+//confirm
+var flag = confirm('确认删除？');
+alert(flag)//确定返回true，取消返回false
+if (flag){
+    //删除逻辑
+}else {
+
+}
+
+//定时器
+setTimeout(function (){
+    alert('hh');
+},3000);
+setInterval(function (){
+    alert('hhh');
+},2000);
+</code></pre>
+<pre><code>/**
+    setTimeout(function,毫秒值) :在一定的时间间隔后执行一个function，只执行一次
+    setInterval(function,毫秒值) :在一定的时间间隔后执行一个function，循环执行
+ */
+</code></pre>
+<p>​</p>
+<h4 id="42-navigator浏览器对象">4.2、Navigator：浏览器对象</h4>
+<h4 id="43-screen屏幕对象">4.3、Screen：屏幕对象</h4>
+<h4 id="44-history历史对象">4.4、History：历史对象</h4>
+<h4 id="45-location地址对象">4.5、Location：地址对象</h4>
+<pre><code>alert('要跳转了')
+location.href = &quot;oolong-tea1.github.io&quot;
+</code></pre>
+<h3 id="五-dom">五、DOM</h3>
+<p>​		：能对HTML文件进行修改</p>
+<h4 id="51-document整个文档对象">5.1、Document：整个文档对象</h4>
+<h4 id="52-element元素对象">5.2、Element：元素对象</h4>
+<h4 id="53-attribute属性对象">5.3、Attribute：属性对象</h4>
+<h4 id="54-text文本对象">5.4、Text：文本对象</h4>
+<h4 id="55-comment注释对象">5.5、Comment：注释对象</h4>
+<h5 id="方法">：方法</h5>
+<pre><code>//1、getElementById:根据id属性值获取，返回一个Element对象
+var img = document.getElementsByClassName(&quot;light&quot;);
+alert(img);
+img.src = '../images/sun.jpg';
+
+//2、getElementByTabName:根据标签名称获取，返回Element对象数组
+var divs = document.getElementsByTagName(&quot;div&quot;);
+/*
+    style:设置css样式
+    innerHTML:设置元素内容
+ */
+for (let i = 0; i &lt; divs.length; i++) {
+    divs[i].style.color = 'red';
+    divs[i].innerHTML = 'HH';
+}
+
+//3、getElementByName:根据name属性值获取，返回Element对象数组
+var hobbies = document.getElementsByName(&quot;hobby&quot;);
+for (let i = 0; i &lt; hobbies.length; i++) {
+    alert(hobbies[i]);
+}
+
+//4、getElementByClassName:根据Class属性值获取，返回Element对象数组
+var clas = document.getElementsByClassName(&quot;cls&quot;);
+for (let i = 0; i &lt; clas.length; i++) {
+    alert(clas[i]);
+}
+</code></pre>
+<h3 id="六-事件监听">六、事件监听</h3>
+<h4 id="61-事件绑定">6.1、事件绑定</h4>
+<p>​				两种方法：</p>
+<pre><code>&lt;script&gt;
+	//方法一：
+    function on(){
+        alert(&quot;点我干嘛&quot;)
+    }
+
+	//方法二：
+    document.getElementById(&quot;btn&quot;).onclick = function (){
+        alert(&quot;点我干什么&quot;)
+    }
+&lt;/script&gt;
+</code></pre>
+<h4 id="62-常见事件">6.2、常见事件</h4>
+<p>​			参考手册：<a href="https://www.w3school.com.cn/jsref/dom_obj_event.asp">HTML DOM 事件 (w3school.com.cn)</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MayBatis学习日记：增删改查]]></title>
         <id>https://Oolong-Tea1.github.io/post/maybatis-xue-xi-ri-ji-zeng-shan-gai-cha/</id>
