@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title> Javaweb学习日记：HTTP协议、Tomcat、Servlet | OolongTea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://Oolong-Tea1.github.io/favicon.ico?v=1653062353504">
+<link rel="stylesheet" href="https://Oolong-Tea1.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="一、HTTP
+1、概念：
+​					超文本传输协议，规定了浏览器和服务器之间数据的传输规则
+2、特点：
+
+
+​	**  基于TCP协议**，面向连接，安全
+
+
+​     基于请求-响应模型的：一次请求一次响应
+
+
+​      HTTP..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://Oolong-Tea1.github.io">
+        <img src="https://Oolong-Tea1.github.io/images/avatar.png?v=1653062353504" class="site-logo">
+        <h1 class="site-title">OolongTea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://Oolong-Tea1.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title"> Javaweb学习日记：HTTP协议、Tomcat、Servlet</h2>
+            <div class="post-date">2022-05-20</div>
+            
+            <div class="post-content" v-pre>
+              <h3 id="一-http">一、HTTP</h3>
+<h4 id="1-概念">1、概念：</h4>
+<p>​					超文本传输协议，<strong>规定</strong>了浏览器和服务器之间数据的<strong>传输规则</strong></p>
+<h4 id="2-特点">2、特点：</h4>
+<ul>
+<li>
+<p>​	**  基于TCP协议**，面向连接，安全</p>
+</li>
+<li>
+<p>​     基于请求-响应模型的：<strong>一次</strong>请求<strong>一次</strong>响应</p>
+</li>
+<li>
+<p>​      HTTP协议是<strong>无状态的响应</strong>：对于事务没有记忆能力。<strong>每一次</strong>请求响应都是<strong>独立</strong> 的</p>
+<p>​		    	<strong>缺点</strong>：多次请求间不能共享数据</p>
+<p>​			    <strong>优点</strong>：速度快</p>
+</li>
+</ul>
+<h4 id="3-请求数据格式">3、请求数据格式</h4>
+<h5 id="31-请求行">3.1、请求行：</h5>
+<p>​					    	请求数据的第一行。其中GET和POST为<strong>请求方式</strong>， / 表示**  请求资源路径**，HTTP/1.1表示<strong>协议版本</strong></p>
+<p>​						    GET和POST的<strong>区别</strong>：</p>
+<p>​								    GET请求请求参数在请求行中，<strong>没有请求体</strong>。POST请求请求参数在请求体中。</p>
+<p>​								    GET请求请求参数大小有限制，<strong>POST没有</strong>。</p>
+<h5 id="32-请求头">3.2、请求头：</h5>
+<p>​					    第二行开始，格式为：Key：Value形式</p>
+<p>​				**  常见的HTTP请求头**：</p>
+<pre><code>- Host:表示请求的主机名
+- User-Agent:浏览器版本，例如Chrome浏览器的标识类似Mozilla/5.0..
+- Chrome/79，E浏览器的标识类似Mozilla/5.0(Windows NT…) like Gecko;
+- Accept:表示浏览器能接收的资源类型，如text/*，image/*或者*/*表示所有;
+- Accept-Language:表示浏览器偏好的语言，服务器可以据此返回不同语言的网页
+- Accept-Encoding:表示浏览器可以支持的压缩类型，例如gzipdeflate等。										
+</code></pre>
+<h5 id="33-请求体">3.3、请求体：</h5>
+<p>​					    POST请求的最后一部分，存放请求参数</p>
+<h4 id="4-响应数据格式">4、响应数据格式</h4>
+<h5 id="41-响应行">4.1、响应行：</h5>
+<p>​						    响应数据的第一行。其中HTTP/1.1表示协议版本，200表示响应状态码，OK表示响应状态描述</p>
+<h5 id="42-响应头">4.2、响应头：</h5>
+<p>​						    第二行开始，格式为：Key：Value</p>
+<p>​		    常见的HTTP响应头:</p>
+<pre><code>- Content-Type:表示该响应内容的类型，例如text/html
+- image/jpeg;
+- Content-Length:表示该响应内容的长度(字节数);
+- Content-Encoding:表示该响应压缩算法，例如gzip;
+- Cache-Control:指示客户端应如何缓存，例如max-age=300表示可以最多缓存300秒
+</code></pre>
+<h5 id="43-响应体">4.3、响应体：</h5>
+<p>​						    最后一部分。存放响应数据</p>
+<h5 id="44-响应状态码">4.4、响应状态码：</h5>
+<h6 id="状态码大类">状态码大类：</h6>
+<figure data-type="image" tabindex="1"><img src="https://Oolong-Tea1.github.io/post-images/1653061670952.png" alt="" loading="lazy"></figure>
+<p>（摘自黑马程序员）</p>
+<p>[状态码大全 - 云+社区 - 腾讯云 (https://Oolong-Tea1.github.io/post-images/1653061693557.png)</p>
+<h6 id="常见的响应状态码">常见的响应状态码：</h6>
+<p>（摘自黑马程序员）</p>
+<h3 id="二-tomcat">二、Tomcat</h3>
+<h4 id="1-解决tomcat自动关闭问题">1、解决Tomcat自动关闭问题：</h4>
+<p>​		    问题一：原本可以运行的，重新打开startup然后加载一会就闪退</p>
+<p>​					    双击shutdown，再重新运行就好了。</p>
+<p>​		    问题二：页面闪过一下就关了</p>
+<p>​					    有可能是JAVA配置环境的问题，重新配置一下。</p>
+<p>​		    其他问题：我在网上找到了一篇不错的贴子，可以学习一下。</p>
+<p>​							[tomcat自动关闭了。 - itcui - 博客园 (cnblogs.com)](https://www.cnblogs.com/itcui/p/9781834.html#:~:text=错误排查. tomcat自动关闭的原因很多，不一定是内存溢出，网上查到原因：. 1.并发用户数目过大，也会导致tomcat自动停止服务. 2.系统本身的网络负载平衡没有做好，导致tomcat自动停止服务.,3.程序迭代不合理也是一个原因. 4.数据库连接未关闭，导致资源损耗过重，会引起服务停止. 5.程序严重错误，也会引起tomcat停止服务. 没错，以上情况我都不是. 接下来就是看日志了，报错看日志是常识了.)</p>
+<h4 id="2-出现乱码">2、出现乱码：</h4>
+<p>​		    打开conf文件夹，找到logging.properties文件，修改控制台的编码，将UTF-8改成GBK。</p>
+<figure data-type="image" tabindex="2"><img src="https://Oolong-Tea1.github.io/post-images/1653061739671.png" alt="" loading="lazy"></figure>
+<h4 id="3-配置">3、配置：</h4>
+<p>​		    修改端口号：conf/server.xml</p>
+<figure data-type="image" tabindex="3"><img src="https://Oolong-Tea1.github.io/post-images/1653061748336.png" alt="" loading="lazy"></figure>
+<p>​		TIP：HTTP协议的默认端口号为80，如果把Tomcat的端口号改为80，将来访问tomcat时则不需要输入端口号</p>
+<h4 id="4-部署项目">4、部署项目：</h4>
+<p>​		    将项目放置到webapps目录下，即部署完成</p>
+<p>​		    一般JavaWeb项目会被打成war包，然后将war包放到webapps目录下，Tomcat会自动解压war文件。<br>
+<img src="https://Oolong-Tea1.github.io/post-images/1653062138316.png" alt="" loading="lazy"></p>
+<p>（截屏自黑马程序员）</p>
+<h4 id="5-创建项目">5、创建项目：</h4>
+<p><img src="https://Oolong-Tea1.github.io/post-images/1653062149033.png" alt="" loading="lazy"><br>
+<img src="https://Oolong-Tea1.github.io/post-images/1653062157916.png" alt="" loading="lazy"></p>
+<p>（截屏自黑马程序员）</p>
+<h4 id="6-tomcat本地集成">6、Tomcat本地集成：</h4>
+<p><img src="https://Oolong-Tea1.github.io/post-images/1653062167367.png" alt="" loading="lazy"><br>
+（截屏自黑马程序员）</p>
+<h4 id="7-添加插件">7、添加插件</h4>
+<figure data-type="image" tabindex="4"><img src="https://Oolong-Tea1.github.io/post-images/1653062176829.png" alt="" loading="lazy"></figure>
+<p>（截屏自黑马程序员）</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://Oolong-Tea1.github.io/post/javascript-xue-xi-ri-ji-ji-chu-yu-fa-dui-xiang-bomdomshi-jian-jian-ting/">
+                  <h3 class="post-title">
+                    Javascript学习日记：基础语法、对象、BOM、DOM、事件监听
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
