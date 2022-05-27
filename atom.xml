@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Oolong-Tea1.github.io</id>
     <title>OolongTea</title>
-    <updated>2022-05-24T11:31:55.866Z</updated>
+    <updated>2022-05-27T08:02:06.219Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Oolong-Tea1.github.io"/>
     <link rel="self" href="https://Oolong-Tea1.github.io/atom.xml"/>
@@ -16,6 +16,511 @@
         <link href="https://Oolong-Tea1.github.io/post/javaweb-xue-xi-ri-ji-servletrequestresponse/">
         </link>
         <updated>2022-05-21T05:09:32.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="一-servlet">一、Servlet：</h3>
+<p>​	是Java提供的一门动态web资源开发技术</p>
+<h4 id="11-快速入门">1.1、快速入门</h4>
+<p>首先先在pom.xml配置文件里面添加好Servlet依赖<br>
+<img src="https://Oolong-Tea1.github.io/post-images/1653637677314.png" alt="" loading="lazy"></p>
+<p>其次，创建一个Demo类实现Servlet接口，实现方法，在service方法 里面输出“Oolong Tea”。在类上面加上</p>
+<p>​	@WebServlet注解，括号内配置该Servlet的访问路径。</p>
+<p><em>Tip</em>：注解里面有两个参数，第一个参数是访问路径，第二个参数是loadOnStartup。</p>
+<p>​			其中loadOnStartup分成两种数值：</p>
+<p>​					<strong>第一种</strong>：负整数，第一次被访问时创建Servlet对象；</p>
+<p>​					<strong>第二种</strong>：0或正整数，服务器启动时同时创建Servlet对象，数字越小优先级越高。</p>
+<figure data-type="image" tabindex="1"><img src="https://Oolong-Tea1.github.io/post-images/1653637719846.png" alt="" loading="lazy"></figure>
+<p>运行我们的项目，启动项目后在控制台会打出我们的项目的基础信息。</p>
+<figure data-type="image" tabindex="2"><img src="https://Oolong-Tea1.github.io/post-images/1653637784876.png" alt="" loading="lazy"></figure>
+<p>在浏览器打开我们的网址。</p>
+<figure data-type="image" tabindex="3"><img src="https://Oolong-Tea1.github.io/post-images/1653637805443.png" alt="" loading="lazy"></figure>
+<p>可以看到网页上啥也没有，但是我们回到idea，可以看到控制台输出了Oolong Tea，所以service方法并不会把信息输出到页面上，而是输出在控制台里。</p>
+<figure data-type="image" tabindex="4"><img src="https://Oolong-Tea1.github.io/post-images/1653637825806.png" alt="" loading="lazy"></figure>
+<h4 id="12-执行流程">1.2、执行流程</h4>
+<figure data-type="image" tabindex="5"><img src="https://Oolong-Tea1.github.io/post-images/1653637877836.png" alt="" loading="lazy"></figure>
+<p>首先看下我们的访问路径，http://localhost:8080访问我们的<strong>tomcat服务器</strong>，Servlet是我们<strong>创建的web项目</strong>，当然是访问到web项目，demo1是@WebServlet<strong>注解的内容</strong>，可以访问到我们的Servlet。</p>
+<p><strong>流程：</strong></p>
+<p>​			由网页首先发请求给<strong>web服务器</strong>，web服务器收到请求后，由Tomcat服务器<strong>创建Servlet对象</strong>，然后再由<strong>Tomcat</strong>去调用对象中的service方法，最后再由<strong>web服务器响应</strong>给网页。</p>
+<h4 id="13-生命周期">1.3、生命周期</h4>
+<ul>
+<li>加载和实例化:默认情况下，当Servlet第一次被访问时，由容器创建Servlet对象</li>
+<li>初始化:在Servlet实例化之后，容器将调用Servlet的init()方法初始化这个对象，完成一些如 ①<br>
+加载配置文件、创建连接等初始化的工作。该方法只调用一次 2</li>
+<li>请求处理:每次请求Servlet时，Servlet容器都会调用Servlet的service()方法对请求进行处理。</li>
+<li>服务终止:当需要释放内存或者容器关闭时，容器就会调用Servlet实例的destroy()方法完成<br>
+资源的释放。在destroy()方法调用之后，容器会释放这个Servlet实例，该实例随后会被Java的垃圾收集器所回收</li>
+</ul>
+<h4 id="14-体系结构">1.4、体系结构</h4>
+<p>由1.3知道，Servlet要响应需要由Tomcat先创建Servlet对象，然后调用service方法，最后再由web服务器将数据响应给网页。但是响应的前提是有请求，而我们的请求方式有两种。所以我们<strong>需要根据不同的请求方式编写不同请求方式****的逻辑代码</strong>。如下代码：</p>
+<pre><code>@Override
+public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+    //根据不同请求方式的不同，分别进行不同的处理
+
+    HttpServletRequest req = (HttpServletRequest) servletRequest;
+    //1、获取请求方式
+    String method = req.getMethod();
+
+    //2、判断
+    if(&quot;GET&quot;.equals(method)){
+        //GET请求方式的逻辑处理代码
+    }else if(&quot;POST&quot;.equals(method)){
+        //POST请求方式的逻辑处理代码
+    }
+
+}
+
+</code></pre>
+<p>但是，用这种方式的话，在实际使用中，每创建一个类你就得现在service方法中写下判断代码，很麻烦。</p>
+<p>所以我们可以写一个类来封装这个判断代码，如下：</p>
+<pre><code>public class MyServletHttp implements Servlet {
+
+
+    @Override
+    public void init(ServletConfig servletConfig) throws ServletException {
+
+    }
+
+    @Override
+    public ServletConfig getServletConfig() {
+        return null;
+    }
+
+    @Override
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+        //根据不同请求方式的不同，分别进行不同的处理
+
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        //1、获取请求方式
+        String method = req.getMethod();
+
+        //2、判断
+        if(&quot;GET&quot;.equals(method)){
+            //GET请求方式的逻辑处理代码
+            doGet(servletRequest,servletResponse);
+        }else if(&quot;POST&quot;.equals(method)){
+            //POST请求方式的逻辑处理代码
+            doPost(servletRequest,servletResponse);
+        }
+    }
+
+    protected void doGet(ServletRequest servletRequest, ServletResponse servletResponse) {
+        
+    }
+
+    protected void doPost(ServletRequest servletRequest, ServletResponse servletResponse) {
+        
+    }
+
+    @Override
+    public String getServletInfo() {
+        return null;
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+}
+</code></pre>
+<p>但是，其实Servlet已经有写了这么一个类可以让我们直接用了，就是<strong>HttpServlet</strong>类。</p>
+<pre><code>public class ServletDemo3 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    }
+}
+</code></pre>
+<h4 id="16-配置">1.6、配置</h4>
+<figure data-type="image" tabindex="6"><img src="https://Oolong-Tea1.github.io/post-images/1653637910872.png" alt="" loading="lazy"></figure>
+<p>（截屏自黑马程序员）</p>
+<h3 id="二-request">二、Request</h3>
+<p>​	：获取请求数据</p>
+<h4 id="21-获取请求数据">2.1、获取请求数据：</h4>
+<p>​		方法如下：</p>
+<p>​			<strong>获取请求行数据：</strong></p>
+<pre><code>@Override
+protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    //获取请求方法：
+    String method = req.getMethod();
+    System.out.println(method);
+    //获取虚拟目录（项目访问路径）
+    String contextPath = req.getContextPath();
+    System.out.println(contextPath);
+    //获取URL（统一资源定位符）
+    StringBuffer url = req.getRequestURL();
+    System.out.println(url.toString());
+    //获取URI（统一资源标识符）
+    String uri = req.getRequestURI();
+    System.out.println(uri);
+    //获取请求参数（GET方式）
+    String queryString = req.getQueryString();
+    System.out.println(queryString);
+
+}
+</code></pre>
+<figure data-type="image" tabindex="7"><img src="https://Oolong-Tea1.github.io/post-images/1653637957636.png" alt="" loading="lazy"></figure>
+<p>​		<strong>获取请求头数据：</strong></p>
+<pre><code>//获取请求头：user-agent：浏览器的版本信息
+String agent = req.getHeader(&quot;user-agent&quot;);
+System.out.println(agent);
+</code></pre>
+<figure data-type="image" tabindex="8"><img src="https://Oolong-Tea1.github.io/post-images/1653637994390.png" alt="" loading="lazy"></figure>
+<p>​		<strong>获取请求体数据：</strong></p>
+<pre><code>@Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //获取POST：请求体：请求参数：
+
+        //1、获取字符输入流
+        BufferedReader br = req.getReader();
+        //2、读取数据
+        String line = br.readLine();
+        System.out.println(line);
+    }
+}
+</code></pre>
+<figure data-type="image" tabindex="9"><img src="https://Oolong-Tea1.github.io/post-images/1653638015428.png" alt="" loading="lazy"></figure>
+<h4 id="22-获取请求参数">2.2、获取请求参数：</h4>
+<p><strong>GET和POST方法通用：</strong></p>
+<pre><code>@WebServlet(&quot;/req2&quot;)
+public class RequestDemo2 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(&quot;get...&quot;);
+
+        //1、获取所有参数的Map集合
+        Map&lt;String,String[]&gt; map = req.getParameterMap();
+        for (String key : map.keySet()) {
+            System.out.print(key + &quot;:&quot;);
+
+            //获取值
+            String[] values = map.get(key);
+            for (String value : values) {
+
+                System.out.print(value + &quot; &quot;);
+            }
+
+            System.out.println();
+        }
+
+        System.out.println(&quot;---------------&quot;);
+
+        //2、根据key获取参数值和数组
+        String[] hobbies = req.getParameterValues(&quot;hobby&quot;);
+        for (String hobby : hobbies) {
+            System.out.println(hobby);
+        }
+
+        System.out.println(&quot;--------&quot;);
+        //3、根据key，获取单个参数值
+        String username = req.getParameter(&quot;username&quot;);
+        String password = req.getParameter(&quot;password&quot;);
+
+        System.out.println(username);
+        System.out.println(password);
+    }
+
+
+
+
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    }
+}
+</code></pre>
+<figure data-type="image" tabindex="10"><img src="https://Oolong-Tea1.github.io/post-images/1653638050418.png" alt="" loading="lazy"></figure>
+<h4 id="23-请求参数乱码解决">2.3、请求参数乱码解决：</h4>
+<pre><code>@Override
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    System.out.println(&quot;post...&quot;);
+    String username = req.getParameter(&quot;username&quot;);
+    System.out.println(username);
+}
+</code></pre>
+<figure data-type="image" tabindex="11"><img src="https://Oolong-Tea1.github.io/post-images/1653638104909.png" alt="" loading="lazy"></figure>
+<p>在输入框中提交中文，在控制台显示的是一串乱码，接下来就来解决这些乱码。</p>
+<figure data-type="image" tabindex="12"><img src="https://Oolong-Tea1.github.io/post-images/1653638130564.png" alt="" loading="lazy"></figure>
+<p>POST：post的最方便，在获取数据前把输入流的编码改成UTF-8就好了。</p>
+<pre><code>@Override
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    System.out.println(&quot;post...&quot;);
+    req.setCharacterEncoding(&quot;UTF-8&quot;);
+    String username = req.getParameter(&quot;username&quot;);
+    System.out.println(username);
+
+
+}
+</code></pre>
+<figure data-type="image" tabindex="13"><img src="https://Oolong-Tea1.github.io/post-images/1653638149398.png" alt="" loading="lazy"></figure>
+<p>GET：因为Tomcat进行URL解码默认的字符集是ISO_8859_1，所以将乱码进行编码再重新解码就好了。</p>
+<p>​			这个方法同样也适用于POST请求。</p>
+<pre><code>@Override
+protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    System.out.println(&quot;get&quot;);
+    String username = req.getParameter(&quot;username&quot;);
+    System.out.println(username);
+
+    //1、先对乱码数据进行编码：转为字节数组
+    byte[] bytes = username.getBytes(StandardCharsets.ISO_8859_1);
+    //2、字节数组解码
+    username = new String(bytes,&quot;UTF-8&quot;);
+    System.out.println(username);
+}
+</code></pre>
+<figure data-type="image" tabindex="14"><img src="https://Oolong-Tea1.github.io/post-images/1653638166688.png" alt="" loading="lazy"></figure>
+<p>这里面涉及到<strong>URL编码</strong>，所以我在网上找了相关知识</p>
+<p><a href="https://baike.baidu.com/item/URL%E7%BC%96%E7%A0%81/3703727">URL编码_百度百科 (baidu.com)</a></p>
+<p><a href="https://blog.csdn.net/weixin_32572129/article/details/114031327">url编码 java_java中的url 编码与解码_原谅教的博客-CSDN博客</a></p>
+<p>有兴趣的可以看看。</p>
+<h4 id="24-请求转发">2.4、请求转发：</h4>
+<p>​		：一种在服务器内部的资源跳转方法</p>
+<p>下图是<strong>实现请求转发</strong>的代码。在请求转发中，可以在请求的类中赋值<strong>封装成map对象</strong>给请求对象，这样子在接收的类中就可以<strong>获取</strong>到map对象，并且可以实现<strong>根据键删除值</strong>。</p>
+<pre><code>@WebServlet(&quot;/req4&quot;)
+public class RequestDemo4 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(&quot;demo4&quot;);
+
+        req.setAttribute(&quot;Oolong&quot;,&quot;tea&quot;);
+
+        req.getRequestDispatcher(&quot;/req5&quot;).forward(req,resp);
+    }
+
+    @Override
+    protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req,resp);
+    }
+}
+</code></pre>
+<pre><code>@WebServlet(&quot;/req5&quot;)
+public class RequestDemo5 extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+     System.out.println(&quot;demo5&quot;);
+     
+   Object oolong = req.getAttribute(&quot;Oolong&quot;);
+    System.out.println(oolong);
+}
+
+	@Override
+	protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    this.doGet(req,resp);
+}
+}
+</code></pre>
+<figure data-type="image" tabindex="15"><img src="https://Oolong-Tea1.github.io/post-images/1653638191247.png" alt="" loading="lazy"></figure>
+<h5 id="请求转发的特点">请求转发的特点：</h5>
+<ol>
+<li>浏览器地址栏路径不发生变化</li>
+<li>只能转发到当前服务器的内部资源</li>
+<li>一次请求，可以在转发的资源间使用request共享数据</li>
+</ol>
+<h3 id="三-response">三、Response</h3>
+<p>​		设置响应数据</p>
+<h4 id="31-重定向">3.1、重定向：</h4>
+<p>​		<a href="https://baike.baidu.com/item/%E9%87%8D%E5%AE%9A%E5%90%91/9064196#2">重定向_百度百科 (baidu.com)</a></p>
+<p>​		是一种<strong>资源跳转方式</strong></p>
+<h5 id="为什么要重定向">为什么要重定向：</h5>
+<ul>
+<li>网站调整（如改变网页<a href="https://baike.baidu.com/item/%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84">目录结构</a>）；</li>
+<li>网页被移到一个新地址；</li>
+<li>网页扩展名改变(如应用需要把.php改成.Html或.shtml)。</li>
+</ul>
+<h5 id="如何实现重定向">如何实现重定向？</h5>
+<p>​		代码如下：</p>
+<p>​		依旧是用两个demo类来演示，重定向的实现很简单，主要使用方法sendRedirect指向新的网站的虚拟目录。</p>
+<pre><code>@WebServlet(&quot;/resp1&quot;)
+public class ResponseDemo1 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(&quot;resp1..&quot;);
+        resp.sendRedirect(&quot;/Servlet/resp2&quot;);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req,resp);
+    }
+}
+</code></pre>
+<pre><code>@WebServlet(&quot;/resp2&quot;)
+public class ResponseDemo2 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(&quot;resp2..&quot;);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req,resp);
+    }
+}
+</code></pre>
+<figure data-type="image" tabindex="16"><img src="https://Oolong-Tea1.github.io/post-images/1653638216086.png" alt="" loading="lazy"></figure>
+<h5 id="重定向的特点">重定向的特点：</h5>
+<ol>
+<li>浏览器地址栏路径发生变化</li>
+<li>可以重定向到任意位置的资源(服务器内部、外部均可</li>
+<li>两次请求，不能在多个资源使用request共享数据</li>
+</ol>
+<h4 id="32-响应数据">3.2、响应数据：</h4>
+<ul>
+<li>
+<h5 id="字符数据">字符数据：</h5>
+</li>
+</ul>
+<pre><code>public class ResponseDemo3 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType(&quot;text/html;charset=utf-8&quot;);
+        PrintWriter writer = resp.getWriter();
+        writer.write(&quot;aa&quot;);
+        writer.write(&quot;&lt;h1&gt;你好&lt;h1&gt;&quot;);
+    }
+</code></pre>
+<figure data-type="image" tabindex="17"><img src="https://Oolong-Tea1.github.io/post-images/1653638230173.png" alt="" loading="lazy"></figure>
+<pre><code>resp.setContentType(&quot;text/html;charset=utf-8&quot;);
+</code></pre>
+<p>这个方法的作用是设置文本的格式，/text/html表示<strong>文本会以html的格式来输出</strong>；charset=utf-8表示将<strong>编码格式设置为utf-8</strong>。</p>
+<p>​	<em>Tip</em>：</p>
+<ol>
+<li>该字符输出流不需要关闭，随着响应结束，resp对象销毁，由服务器关闭。</li>
+<li>中文数据乱码：通过Response获取的字符输出流默认编码为ISO-8859-1</li>
+</ol>
+<ul>
+<li>
+<h5 id="字节数据">字节数据：</h5>
+</li>
+</ul>
+<pre><code>@WebServlet(&quot;/resp4&quot;)
+public class ResponseDemo4 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       //1、读取文件
+        FileInputStream fis = new FileInputStream(&quot;D:\\新建文件夹\\a.JPG&quot;);
+        //2、获取Response的字节输出流
+        ServletOutputStream os = resp.getOutputStream();
+        //3、完成流的copy
+        IOUtils.copy(fis,os);
+
+        fis.close();
+    }
+</code></pre>
+<p>代码中的<em>IOUtils</em>是apache提供的一个<strong>工具类</strong>，在pom.xml文件中导入依赖**&quot;commons-io”**即可。</p>
+<p>利用IOUtils，我们可以很方便的<strong>完成字节数据的复制</strong>。</p>
+<figure data-type="image" tabindex="18"><img src="https://Oolong-Tea1.github.io/post-images/1653638246981.png" alt="" loading="lazy"></figure>
+<h3 id="四-个人实操报错">四、个人实操报错</h3>
+<h4 id="41-将以下代码放到properties标签里导致报错哦">4.1、将以下代码放到properties标签里，导致报错哦</h4>
+<pre><code>&lt;build&gt;
+  &lt;plugins&gt;
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.apache.tomcat.maven&lt;/groupId&gt;
+      &lt;artifactId&gt;tomcat7-maven-plugin&lt;/artifactId&gt;
+      &lt;version&gt;2.2&lt;/version&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+<p>​		运行服务器时报错。</p>
+<figure data-type="image" tabindex="19"><img src="https://Oolong-Tea1.github.io/post-images/1653638328877.png" alt="" loading="lazy"></figure>
+<h4 id="42-servlet打开html文件404">4.2、Servlet打开Html文件404</h4>
+<p><img src="https://Oolong-Tea1.github.io/post-images/1653638356115.png" alt="" loading="lazy"><br>
+原因：html文件位置错误，须放到web-app目录下。</p>
+<figure data-type="image" tabindex="20"><img src="https://Oolong-Tea1.github.io/post-images/1653638371894.png" alt="" loading="lazy"></figure>
+<h4 id="43-a-child-container-failed-during-start">4.3、A child container failed during start</h4>
+<figure data-type="image" tabindex="21"><img src="https://Oolong-Tea1.github.io/post-images/1653638392814.png" alt="" loading="lazy"></figure>
+<pre><code>严重: A child container failed during start
+java.util.concurrent.ExecutionException: org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Tomcat].StandardHost[localhost].StandardContext[/Servlet]]
+	at java.base/java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:191)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:1123)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:800)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Tomcat].StandardHost[localhost].StandardContext[/Servlet]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:154)
+	... 6 more
+Caused by: java.lang.IllegalArgumentException: Invalid &lt;url-pattern&gt; req3 in servlet mapping
+	at org.apache.catalina.core.StandardContext.addServletMapping(StandardContext.java:3245)
+	at org.apache.catalina.core.StandardContext.addServletMapping(StandardContext.java:3220)
+	at org.apache.catalina.deploy.WebXml.configureContext(WebXml.java:1367)
+	at org.apache.catalina.startup.ContextConfig.webConfig(ContextConfig.java:1346)
+	at org.apache.catalina.startup.ContextConfig.configureStart(ContextConfig.java:878)
+	at org.apache.catalina.startup.ContextConfig.lifecycleEvent(ContextConfig.java:376)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:90)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5322)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	... 6 more
+
+5月 26, 2022 3:32:56 下午 org.apache.catalina.core.ContainerBase startInternal
+严重: A child container failed during start
+java.util.concurrent.ExecutionException: org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Tomcat].StandardHost[localhost]]
+	at java.base/java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:191)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:1123)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:302)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:443)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:732)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:341)
+	at org.apache.tomcat.maven.plugin.tomcat7.run.AbstractRunMojo.startContainer(AbstractRunMojo.java:1238)
+	at org.apache.tomcat.maven.plugin.tomcat7.run.AbstractRunMojo.execute(AbstractRunMojo.java:592)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:137)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:210)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:156)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:148)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:56)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:305)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:192)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:105)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:957)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:289)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:193)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:282)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:225)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:406)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:347)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Tomcat].StandardHost[localhost]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:154)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: org.apache.catalina.LifecycleException: A child container failed during start
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:1131)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:800)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	... 6 more
+</code></pre>
+<p>上面是报错信息。我们可以提取到这行信息</p>
+<pre><code>Caused by: java.lang.IllegalArgumentException: Invalid &lt;url-pattern&gt; req3 in servlet mapping
+</code></pre>
+<p>然后找到头行@WebServlet的注解里面“req3”少了条斜杠。</p>
+<p>我们补上斜杠，重新运行就不报错了。</p>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[ Javaweb学习日记：HTTP协议、Tomcat]]></title>
