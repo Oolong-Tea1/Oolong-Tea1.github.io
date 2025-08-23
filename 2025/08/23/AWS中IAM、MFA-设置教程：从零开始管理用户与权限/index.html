@@ -22,7 +22,7 @@
 
   
 
-  <title>王道长服务器 | 亚马逊云</title>
+  <title>AWS 中 IAM MFA 设置教程：从零开始管理用户与权限~ | 王道长服务器 | 亚马逊云</title>
 
   
 
@@ -157,31 +157,29 @@
 </header>
 
     
-
-  <div id="recent-posts">
+<article id="post">
+  <div class="post-title">AWS 中 IAM MFA 设置教程：从零开始管理用户与权限~</div>
+  
+<div class="post-meta">
     
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/2025/08/23/AWS%E4%B8%ADIAM%E3%80%81MFA-%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/">AWS 中 IAM MFA 设置教程：从零开始管理用户与权限~</a>
-          </div>
-          <div class="post-meta">
-            
-             
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">636 words</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">2 min</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-                  <p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/0.png" alt="image-20250823140952412"><br>在 AWS 中，<strong>IAM（身份与访问管理）</strong> 是最基础也最重要的安全配置。<br> 通过 IAM，你可以创建独立的用户、分配合适的权限，避免所有人都用 root 账号操作 AWS，从而降低安全风险。</p>
+     
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">636 words</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">2 min</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/0.png" alt="image-20250823140952412"><br>在 AWS 中，<strong>IAM（身份与访问管理）</strong> 是最基础也最重要的安全配置。<br> 通过 IAM，你可以创建独立的用户、分配合适的权限，避免所有人都用 root 账号操作 AWS，从而降低安全风险。</p>
 <p>下面，我们通过几个步骤来完成 IAM 基础配置。</p>
 <hr>
 <h2 id="1️⃣-创建-IAM-用户"><a href="#1️⃣-创建-IAM-用户" class="headerlink" title="1️⃣ 创建 IAM 用户"></a>1️⃣ 创建 IAM 用户</h2><p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/1.png" alt="image-20250823140952412"></p>
@@ -238,22 +236,69 @@
 <li>给敏感操作配置 <strong>最小权限原则</strong></li>
 <li>开启 MFA，保证账号安全</li>
 </ul>
-
-             
-          </div>
-        </div>
-      <div class="post-footer">
+</div>
         
-    </div>
-    
+          <div class="post-copyright">
+                  <div class="copyright-item">
+                      <span> Author: John Doe</span>
+                  </div>
+                  <div class="copyright-item">
+                      <span> Link: <a href="http://example.com/2025/08/23/AWS%E4%B8%ADIAM%E3%80%81MFA-%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/">http://example.com/2025/08/23/AWS%E4%B8%ADIAM%E3%80%81MFA-%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/</a></span>
+                  </div>
+                  <div class="copyright-item">
+                      <span> License: 本博客所有文章除特别声明外，均采用许可协议 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 转载请注明出处！</span>
+                  </div>
+          </div>
+        
   </div>
 
+  <div class="share-reward">
+    <div class="share">
+        
+<div class="social-share" data-sites="facebook,twitter,wechat,weibo,qq"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script>
 
 
-<nav class="paginator">
+      </div>
+        <div class="reward">
+          
+        </div>
+    </div>
+    
+    <div class="post_tags">
       
-            
-</nav>
+    </div>
+    <div class="post-nav">
+      
+      
+    </div>
+      
+
+
+
+  <div id="valine"></div>
+  <script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+        new Valine({
+          el: '#valine',
+          appId: "",
+          appKey: "",
+          avatar: "mm",
+          lang: "",
+          meta: 'nick,mail,link'.split(','),
+          requiredFields: 'nick,mail'.split(','),
+          placeholder: "评论记得带上邮箱,你的留言我会马上收到邮箱提醒哒",
+          pageSize:'10',
+          recordIP: 'false',
+          serverURLs: "",
+          emojiCDN: "",
+          enableQQ: "true",
+        });
+  </script>
+  
+
+</article>
 
     
 <a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
