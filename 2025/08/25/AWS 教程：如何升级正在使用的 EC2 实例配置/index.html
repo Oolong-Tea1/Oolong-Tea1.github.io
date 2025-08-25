@@ -147,10 +147,10 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">633 字</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">535 字</span>
            
         
-          <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
+          <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
                                
       </div>
      
@@ -159,7 +159,7 @@
 
   
   <div class="content">
-        <div><p>![0](&#x2F;images&#x2F;AWS 教程：如何升级正在使用的 EC2 实例配置&#x2F;0.jpg)</p>
+        <div><p><img src= "/img/loading.gif" data-src="/images/AWS%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84EC2%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/0.jpg" alt="0"></p>
 <p>在日常使用 AWS EC2 时，可能会遇到以下情况：</p>
 <ul>
 <li>实例运行越来越慢，需要升级 CPU &#x2F; 内存</li>
@@ -168,12 +168,12 @@
 </ul>
 <p>下面就来一步步讲解，如何安全地升级正在使用的 EC2 实例。</p>
 <hr>
-<h2 id="1️⃣-升级实例类型（CPU-内存）"><a href="#1️⃣-升级实例类型（CPU-内存）" class="headerlink" title="1️⃣ 升级实例类型（CPU &#x2F; 内存）"></a>1️⃣ 升级实例类型（CPU &#x2F; 内存）</h2><h3 id="步骤-1：停止实例"><a href="#步骤-1：停止实例" class="headerlink" title="步骤 1：停止实例"></a>步骤 1：停止实例</h3><p>![photo_2025-07-19_14-31-42](&#x2F;images&#x2F;AWS 教程：如何升级正在使用的 EC2 实例配置&#x2F;1.png)</p>
+<h2 id="1️⃣-升级实例类型（CPU-内存）"><a href="#1️⃣-升级实例类型（CPU-内存）" class="headerlink" title="1️⃣ 升级实例类型（CPU &#x2F; 内存）"></a>1️⃣ 升级实例类型（CPU &#x2F; 内存）</h2><h3 id="步骤-1：停止实例"><a href="#步骤-1：停止实例" class="headerlink" title="步骤 1：停止实例"></a>步骤 1：停止实例</h3><p><img src= "/img/loading.gif" data-src="/images/AWS%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84EC2%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/1.png" alt="photo_2025-07-19_14-31-42"></p>
 <ul>
 <li>在修改实例类型前，需要先 <strong>停止实例</strong>（注意：停止不会丢失数据，但会短暂停机）。</li>
 </ul>
 <hr>
-<h3 id="步骤-2：修改实例类型"><a href="#步骤-2：修改实例类型" class="headerlink" title="步骤 2：修改实例类型"></a>步骤 2：修改实例类型</h3><p>![photo_2025-07-19_14-31-59](&#x2F;images&#x2F;AWS 教程：如何升级正在使用的 EC2 实例配置&#x2F;AWS 教程：如何升级正在使用的 EC2 实例配置&#x2F;2.png)</p>
+<h3 id="步骤-2：修改实例类型"><a href="#步骤-2：修改实例类型" class="headerlink" title="步骤 2：修改实例类型"></a>步骤 2：修改实例类型</h3><p><img src= "/img/loading.gif" data-src="/images/AWS%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84EC2%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/2.png" alt="photo_2025-07-19_14-31-59"></p>
 <ul>
 <li>在弹出的对话框中选择新的实例类型，例如从 <code>t3.micro</code> 升级为 <code>t3.medium</code>。</li>
 <li>点击 <strong>Apply</strong> 保存。</li>
