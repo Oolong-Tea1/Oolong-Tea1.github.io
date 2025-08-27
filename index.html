@@ -162,19 +162,6 @@
           <div class="content">
             
               <p>SSH（Secure Shell）是管理 Linux 服务器的标准方式，既能用于 <strong>AWS EC2</strong>，也能用于 <strong>普通物理机 &#x2F; VPS</strong>。本文将分两部分详细介绍。</p>
-<hr>
-<h2 id="一、AWS-EC2-实例-SSH-连接"><a href="#一、AWS-EC2-实例-SSH-连接" class="headerlink" title="一、AWS EC2 实例 SSH 连接"></a>一、AWS EC2 实例 SSH 连接</h2><h3 id="1-前提条件"><a href="#1-前提条件" class="headerlink" title="1. 前提条件"></a>1. 前提条件</h3><ul>
-<li>已启动一台 <strong>EC2 Linux 实例</strong>。</li>
-<li>创建时下载了 <strong>密钥对（.pem 文件）</strong>。</li>
-<li>本地安装了 SSH 客户端（Mac&#x2F;Linux 默认有，Windows 可用 PowerShell 或 PuTTY）。</li>
-</ul>
-<h3 id="2-获取实例公网-IP"><a href="#2-获取实例公网-IP" class="headerlink" title="2. 获取实例公网 IP"></a>2. 获取实例公网 IP</h3><ul>
-<li>进入 <strong>EC2 控制台 → Instances</strong></li>
-<li>查看 <strong>Public IPv4 address</strong>（如 <code>54.210.xx.xx</code>）。</li>
-</ul>
-<h3 id="3-调整密钥权限（Mac-Linux）"><a href="#3-调整密钥权限（Mac-Linux）" class="headerlink" title="3. 调整密钥权限（Mac&#x2F;Linux）"></a>3. 调整密钥权限（Mac&#x2F;Linux）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 400 my-key.pem</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-连接命令"><a href="#4-连接命令" class="headerlink" title="4. 连接命令"></a>4. 连接命令</h3>
              
           </div>
         </div>
@@ -205,7 +192,7 @@
         </div>
           <div class="content">
             
-              <p><img src="/img/loading.gif" data-src="/images/AWS%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/0.jpeg" alt="0"></p>
+              <p><img src="/images/AWS%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/0.jpeg" alt="0"></p>
 <p>在日常使用 AWS 的过程中，你可能会遇到这样的问题：</p>
 <ul>
 <li>想要启动更多的 EC2 实例，却提示“配额不足”；</li>
@@ -213,18 +200,6 @@
 <li>部署多个环境时，VPC 数量受限。</li>
 </ul>
 <p>这些情况其实都是 <strong>AWS 配额（Service Quotas）</strong> 的限制。本文将带你全面理解配额，并手把手教你如何申请扩展。</p>
-<hr>
-<h2 id="一、什么是-AWS-配额（Service-Quotas）"><a href="#一、什么是-AWS-配额（Service-Quotas）" class="headerlink" title="一、什么是 AWS 配额（Service Quotas）"></a>一、什么是 AWS 配额（Service Quotas）</h2><p>AWS 配额指的是 <strong>AWS 账号在某个服务下能使用的最大资源数量或速率</strong>。</p>
-<ul>
-<li><strong>软限制（Soft Limit）</strong>：默认值较低，可以申请提升（例如 EC2 实例数量、EIP 数量）。</li>
-<li><strong>硬限制（Hard Limit）</strong>：无法提升，受 AWS 架构约束（例如单个安全组最多规则数）。</li>
-</ul>
-<h3 id="常见默认配额示例："><a href="#常见默认配额示例：" class="headerlink" title="常见默认配额示例："></a>常见默认配额示例：</h3><ul>
-<li><strong>EC2</strong>：单个区域内默认 20 个实例</li>
-<li><strong>EIP</strong>：每个区域最多 5 个</li>
-<li><strong>VPC</strong>：每个区域默认 5 个</li>
-<li><strong>RDS</strong>：默认最多 40 个数据库实例</li>
-</ul>
              
           </div>
         </div>
@@ -255,7 +230,7 @@
         </div>
           <div class="content">
             
-              <p><img src="/img/loading.gif" data-src="/images/AWS%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84EC2%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/0.jpg" alt="0"></p>
+              <p><img src="/images/AWS%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84EC2%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/0.jpg" alt="0"></p>
 <p>在日常使用 AWS EC2 时，可能会遇到以下情况：</p>
 <ul>
 <li>实例运行越来越慢，需要升级 CPU &#x2F; 内存</li>
@@ -263,12 +238,6 @@
 <li>想要更高的网络性能</li>
 </ul>
 <p>下面就来一步步讲解，如何安全地升级正在使用的 EC2 实例。</p>
-<hr>
-<h2 id="1️⃣-升级实例类型（CPU-内存）"><a href="#1️⃣-升级实例类型（CPU-内存）" class="headerlink" title="1️⃣ 升级实例类型（CPU &#x2F; 内存）"></a>1️⃣ 升级实例类型（CPU &#x2F; 内存）</h2><h3 id="步骤-1：停止实例"><a href="#步骤-1：停止实例" class="headerlink" title="步骤 1：停止实例"></a>步骤 1：停止实例</h3><p><img src="/img/loading.gif" data-src="/images/AWS%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84EC2%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/1.png" alt="photo_2025-07-19_14-31-42"></p>
-<ul>
-<li>在修改实例类型前，需要先 <strong>停止实例</strong>（注意：停止不会丢失数据，但会短暂停机）。</li>
-</ul>
-<hr>
              
           </div>
         </div>
@@ -299,17 +268,8 @@
         </div>
           <div class="content">
             
-              <p><img src="/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/0.png" alt="image-20250823140952412"><br>在 AWS 中，<strong>IAM（身份与访问管理）</strong> 是最基础也最重要的安全配置。<br> 通过 IAM，你可以创建独立的用户、分配合适的权限，避免所有人都用 root 账号操作 AWS，从而降低安全风险。</p>
+              <p><img src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/0.png" alt="image-20250823140952412"><br>在 AWS 中，<strong>IAM（身份与访问管理）</strong> 是最基础也最重要的安全配置。<br> 通过 IAM，你可以创建独立的用户、分配合适的权限，避免所有人都用 root 账号操作 AWS，从而降低安全风险。</p>
 <p>下面，我们通过几个步骤来完成 IAM 基础配置。</p>
-<hr>
-<h2 id="1️⃣-创建-IAM-用户"><a href="#1️⃣-创建-IAM-用户" class="headerlink" title="1️⃣ 创建 IAM 用户"></a>1️⃣ 创建 IAM 用户</h2><p><img src="/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/1.png" alt="image-20250823140952412"></p>
-<p><img src="/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/2.png" alt="image-20250823141052523"></p>
-<p><img src="/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/3.png" alt="image-20250823141457856"></p>
-<blockquote>
-<p>进入 IAM 控制台，选择 <strong>Add user</strong>。<br> 输入用户名（例如 <code>user</code>），选择 <strong>AWS Management Console access</strong>，并设置初始密码。<br> 这样，新建的用户就可以通过独立账号登录 AWS，而不用使用 root 账号。</p>
-</blockquote>
-<hr>
-<h2 id="2️⃣-创建用户组（Group）并分配权限"><a href="#2️⃣-创建用户组（Group）并分配权限" class="headerlink" title="2️⃣ 创建用户组（Group）并分配权限"></a>2️⃣ 创建用户组（Group）并分配权限</h2>
              
           </div>
         </div>
