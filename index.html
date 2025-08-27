@@ -142,6 +142,50 @@
     
       <div class="recent-post-item">
           <div class="post-title ">
+            <a href="/2025/08/27/SSH%20%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A8%E6%94%BB%E7%95%A5/">SSH 连接服务器全攻略</a>
+          </div>
+          <div class="post-meta">
+            
+             
+             
+            
+             <div class="post-meta-item wordcount">
+                
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">612 字</span>
+                   
+                
+                  <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
+                                       
+              </div>
+             
+        </div>
+          <div class="content">
+            
+              <p>SSH（Secure Shell）是管理 Linux 服务器的标准方式，既能用于 <strong>AWS EC2</strong>，也能用于 <strong>普通物理机 &#x2F; VPS</strong>。本文将分两部分详细介绍。</p>
+<hr>
+<h2 id="一、AWS-EC2-实例-SSH-连接"><a href="#一、AWS-EC2-实例-SSH-连接" class="headerlink" title="一、AWS EC2 实例 SSH 连接"></a>一、AWS EC2 实例 SSH 连接</h2><h3 id="1-前提条件"><a href="#1-前提条件" class="headerlink" title="1. 前提条件"></a>1. 前提条件</h3><ul>
+<li>已启动一台 <strong>EC2 Linux 实例</strong>。</li>
+<li>创建时下载了 <strong>密钥对（.pem 文件）</strong>。</li>
+<li>本地安装了 SSH 客户端（Mac&#x2F;Linux 默认有，Windows 可用 PowerShell 或 PuTTY）。</li>
+</ul>
+<h3 id="2-获取实例公网-IP"><a href="#2-获取实例公网-IP" class="headerlink" title="2. 获取实例公网 IP"></a>2. 获取实例公网 IP</h3><ul>
+<li>进入 <strong>EC2 控制台 → Instances</strong></li>
+<li>查看 <strong>Public IPv4 address</strong>（如 <code>54.210.xx.xx</code>）。</li>
+</ul>
+<h3 id="3-调整密钥权限（Mac-Linux）"><a href="#3-调整密钥权限（Mac-Linux）" class="headerlink" title="3. 调整密钥权限（Mac&#x2F;Linux）"></a>3. 调整密钥权限（Mac&#x2F;Linux）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 400 my-key.pem</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-连接命令"><a href="#4-连接命令" class="headerlink" title="4. 连接命令"></a>4. 连接命令</h3>
+             
+          </div>
+        </div>
+      <div class="post-footer">
+        
+        <div class="readmore"><a href="/2025/08/27/SSH%20%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A8%E6%94%BB%E7%95%A5/">阅读全文 »</a></div>   
+        
+    </div>
+    
+      <div class="recent-post-item">
+          <div class="post-title ">
             <a href="/2025/08/26/AWS%20%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/">AWS 配额与申请扩展指南</a>
           </div>
           <div class="post-meta">
