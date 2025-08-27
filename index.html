@@ -161,7 +161,7 @@
         </div>
           <div class="content">
             
-                  <p><img src= "/img/loading.gif" data-src="/images/AWS%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/0.jpeg" alt="0"></p>
+              <p><img src="/img/loading.gif" data-src="/images/AWS%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/0.jpeg" alt="0"></p>
 <p>在日常使用 AWS 的过程中，你可能会遇到这样的问题：</p>
 <ul>
 <li>想要启动更多的 EC2 实例，却提示“配额不足”；</li>
@@ -181,59 +181,12 @@
 <li><strong>VPC</strong>：每个区域默认 5 个</li>
 <li><strong>RDS</strong>：默认最多 40 个数据库实例</li>
 </ul>
-<p>👉 不同服务、不同区域的配额各不相同。</p>
-<hr>
-<h2 id="二、为什么要关注配额"><a href="#二、为什么要关注配额" class="headerlink" title="二、为什么要关注配额"></a>二、为什么要关注配额</h2><ol>
-<li><strong>避免上线受阻</strong>：如果在业务高峰时才发现资源不够用，会严重影响进度。</li>
-<li><strong>合理规划架构</strong>：提前了解配额，能避免因限制导致的部署失败。</li>
-<li><strong>企业合规需求</strong>：大规模应用通常会涉及数十个 VPC、上百个实例，需要提前扩容。</li>
-</ol>
-<hr>
-<h2 id="三、如何查看当前配额"><a href="#三、如何查看当前配额" class="headerlink" title="三、如何查看当前配额"></a>三、如何查看当前配额</h2><p>AWS 提供了 <strong>Service Quotas 控制台</strong>，你可以在里面查看和管理所有服务的配额。</p>
-<h3 id="操作步骤："><a href="#操作步骤：" class="headerlink" title="操作步骤："></a>操作步骤：</h3><p><img src= "/img/loading.gif" data-src="/images/AWS%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/1.png" alt="image-20250826111831747"></p>
-<ol>
-<li>登录 AWS 控制台，搜索并进入 <strong>Service Quotas</strong>。</li>
-<li>选择需要查看的服务，例如 <strong>EC2</strong>。</li>
-<li>在列表中即可看到该服务的配额详情（名称、默认值、可否调整）。</li>
-</ol>
-<hr>
-<h2 id="四、如何申请提升配额"><a href="#四、如何申请提升配额" class="headerlink" title="四、如何申请提升配额"></a>四、如何申请提升配额</h2><p>如果你发现某个配额不足，可以通过控制台发起申请。</p>
-<p>建议是在全英文界面下进行申请。</p>
-<h3 id="操作步骤：-1"><a href="#操作步骤：-1" class="headerlink" title="操作步骤："></a>操作步骤：</h3><p><img src= "/img/loading.gif" data-src="/images/AWS%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/2.png" alt="image-20250826112444750"></p>
-<p><img src= "/img/loading.gif" data-src="/images/AWS%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/3.png" alt="image-20250826112525853"></p>
-<ol>
-<li>打开 <strong>Service Quotas</strong> → 进入目标服务（例如 EC2）。</li>
-<li>找到要扩展的配额（如 Running On-Demand Standard instances）。</li>
-<li>点击 <strong>Request quota increase</strong>。</li>
-<li>输入目标值（如从 20 提升到 50）。</li>
-<li>提交申请后，AWS 会自动生成支持工单，等待审批。</li>
-</ol>
-<p><img src= "/img/loading.gif" data-src="/images/AWS%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/4.png" alt="4"></p>
-<hr>
-<h2 id="五、常见的需要提升的配额场景"><a href="#五、常见的需要提升的配额场景" class="headerlink" title="五、常见的需要提升的配额场景"></a>五、常见的需要提升的配额场景</h2><ul>
-<li><strong>EC2 实例数</strong>：企业级应用需要更多计算节点</li>
-<li><strong>EIP 数量</strong>：多环境、多服务的公网访问需求</li>
-<li><strong>VPC 数量</strong>：多租户架构或区域隔离部署</li>
-<li><strong>CloudFormation 堆栈资源限制</strong>：大规模自动化部署时常遇到</li>
-</ul>
-<hr>
-<h2 id="六、最佳实践"><a href="#六、最佳实践" class="headerlink" title="六、最佳实践"></a>六、最佳实践</h2><ol>
-<li><strong>提前申请</strong><br> 在业务上线前至少一周提交扩容申请，避免紧急情况。</li>
-<li><strong>注意区域性</strong><br> 配额是按 <strong>Region</strong> 区分的，比如东京区域的配额扩展不会影响新加坡区域。</li>
-<li><strong>监控与自动化</strong><br> 使用 <strong>Service Quotas API</strong> 或 <strong>CloudWatch</strong> 定期检查配额，避免超限。</li>
-<li><strong>企业支持计划</strong><br> 建议启用 <strong>Business&#x2F;Enterprise Support</strong>，审批速度更快，更适合大规模团队。</li>
-</ol>
-<hr>
-<h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h2><ul>
-<li><strong>配额是 AWS 的资源使用上限</strong>，既是保护机制，也是规划依据。</li>
-<li><strong>查看 → 申请 → 扩展</strong> 是标准流程，通常 1–2 天内即可完成。</li>
-<li>建议所有团队在正式部署前 <strong>预估配额需求并提前申请</strong>，避免生产环境卡壳。</li>
-</ul>
-
              
           </div>
         </div>
       <div class="post-footer">
+        
+        <div class="readmore"><a href="/2025/08/26/AWS%20%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/">阅读全文 »</a></div>   
         
     </div>
     
@@ -258,7 +211,7 @@
         </div>
           <div class="content">
             
-                  <p><img src= "/img/loading.gif" data-src="/images/AWS%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84EC2%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/0.jpg" alt="0"></p>
+              <p><img src="/img/loading.gif" data-src="/images/AWS%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84EC2%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/0.jpg" alt="0"></p>
 <p>在日常使用 AWS EC2 时，可能会遇到以下情况：</p>
 <ul>
 <li>实例运行越来越慢，需要升级 CPU &#x2F; 内存</li>
@@ -267,57 +220,17 @@
 </ul>
 <p>下面就来一步步讲解，如何安全地升级正在使用的 EC2 实例。</p>
 <hr>
-<h2 id="1️⃣-升级实例类型（CPU-内存）"><a href="#1️⃣-升级实例类型（CPU-内存）" class="headerlink" title="1️⃣ 升级实例类型（CPU &#x2F; 内存）"></a>1️⃣ 升级实例类型（CPU &#x2F; 内存）</h2><h3 id="步骤-1：停止实例"><a href="#步骤-1：停止实例" class="headerlink" title="步骤 1：停止实例"></a>步骤 1：停止实例</h3><p><img src= "/img/loading.gif" data-src="/images/AWS%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84EC2%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/1.png" alt="photo_2025-07-19_14-31-42"></p>
+<h2 id="1️⃣-升级实例类型（CPU-内存）"><a href="#1️⃣-升级实例类型（CPU-内存）" class="headerlink" title="1️⃣ 升级实例类型（CPU &#x2F; 内存）"></a>1️⃣ 升级实例类型（CPU &#x2F; 内存）</h2><h3 id="步骤-1：停止实例"><a href="#步骤-1：停止实例" class="headerlink" title="步骤 1：停止实例"></a>步骤 1：停止实例</h3><p><img src="/img/loading.gif" data-src="/images/AWS%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84EC2%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/1.png" alt="photo_2025-07-19_14-31-42"></p>
 <ul>
 <li>在修改实例类型前，需要先 <strong>停止实例</strong>（注意：停止不会丢失数据，但会短暂停机）。</li>
 </ul>
 <hr>
-<h3 id="步骤-2：修改实例类型"><a href="#步骤-2：修改实例类型" class="headerlink" title="步骤 2：修改实例类型"></a>步骤 2：修改实例类型</h3><p><img src= "/img/loading.gif" data-src="/images/AWS%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84EC2%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/2.png" alt="photo_2025-07-19_14-31-59"></p>
-<ul>
-<li>在弹出的对话框中选择新的实例类型，例如从 <code>t3.micro</code> 升级为 <code>t3.medium</code>。</li>
-<li>点击 <strong>Apply</strong> 保存。</li>
-</ul>
-<hr>
-<h3 id="步骤-3：启动实例"><a href="#步骤-3：启动实例" class="headerlink" title="步骤 3：启动实例"></a>步骤 3：启动实例</h3><ul>
-<li>启动实例，新的配置就会生效。</li>
-<li>登录实例，确认服务运行正常。</li>
-</ul>
-<hr>
-<h2 id="2️⃣-升级存储（EBS-磁盘扩容）"><a href="#2️⃣-升级存储（EBS-磁盘扩容）" class="headerlink" title="2️⃣ 升级存储（EBS 磁盘扩容）"></a>2️⃣ 升级存储（EBS 磁盘扩容）</h2><h3 id="步骤-1：修改卷大小"><a href="#步骤-1：修改卷大小" class="headerlink" title="步骤 1：修改卷大小"></a>步骤 1：修改卷大小</h3><ul>
-<li>进入 <strong>Elastic Block Store (EBS)</strong> → 选择挂载的磁盘 → 点击 <strong>Modify volume</strong>。</li>
-<li>增加磁盘大小，例如从 20 GB 升级为 50 GB。</li>
-<li>提交后，EBS 会自动扩容（在线操作，无需停机）。</li>
-</ul>
-<hr>
-<h3 id="步骤-2：调整文件系统"><a href="#步骤-2：调整文件系统" class="headerlink" title="步骤 2：调整文件系统"></a>步骤 2：调整文件系统</h3><ul>
-<li>登录 EC2 实例，执行以下命令，让操作系统识别新的空间：</li>
-</ul>
-<p><strong>Linux 示例：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 查看磁盘</span><br><span class="line">lsblk</span><br><span class="line"></span><br><span class="line"># 扩展文件系统（ext4）</span><br><span class="line">sudo resize2fs /dev/xvda1</span><br><span class="line"></span><br><span class="line"># 如果是 XFS 文件系统</span><br><span class="line">sudo xfs_growfs -d /</span><br></pre></td></tr></table></figure>
-
-<p><strong>Windows 示例：</strong></p>
-<ul>
-<li>打开 <strong>磁盘管理 → 右键分区 → 扩展卷</strong>。</li>
-</ul>
-<hr>
-<h2 id="3️⃣-升级前的注意事项"><a href="#3️⃣-升级前的注意事项" class="headerlink" title="3️⃣ 升级前的注意事项"></a>3️⃣ 升级前的注意事项</h2><ul>
-<li><strong>快照备份</strong>：在任何升级前，先对 EBS 卷创建快照。</li>
-<li><strong>实例类型兼容性</strong>：有些老实例需要停机迁移到新硬件才能升级。</li>
-<li><strong>最小权限原则</strong>：操作前确认 IAM 用户有 <code>ec2:ModifyInstanceAttribute</code>、<code>ec2:ModifyVolume</code> 权限。</li>
-<li><strong>业务停机规划</strong>：实例类型升级必须停止实例，建议选择业务低峰期操作。</li>
-</ul>
-<hr>
-<h2 id="4️⃣-总结"><a href="#4️⃣-总结" class="headerlink" title="4️⃣ 总结"></a>4️⃣ 总结</h2><ul>
-<li>升级实例类型：停机 → 修改 → 重启</li>
-<li>扩容磁盘：在线修改 EBS → 登录实例扩展文件系统</li>
-<li>记得做好快照备份，确保数据安全</li>
-</ul>
-<p>通过以上步骤，你就能平滑升级正在使用的 EC2 实例配置，提升性能的同时，最大程度保证业务连续性。</p>
-
              
           </div>
         </div>
       <div class="post-footer">
+        
+        <div class="readmore"><a href="/2025/08/25/AWS%20%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84%20EC2%20%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/">阅读全文 »</a></div>   
         
     </div>
     
@@ -342,68 +255,23 @@
         </div>
           <div class="content">
             
-                  <p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/0.png" alt="image-20250823140952412"><br>在 AWS 中，<strong>IAM（身份与访问管理）</strong> 是最基础也最重要的安全配置。<br> 通过 IAM，你可以创建独立的用户、分配合适的权限，避免所有人都用 root 账号操作 AWS，从而降低安全风险。</p>
+              <p><img src="/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/0.png" alt="image-20250823140952412"><br>在 AWS 中，<strong>IAM（身份与访问管理）</strong> 是最基础也最重要的安全配置。<br> 通过 IAM，你可以创建独立的用户、分配合适的权限，避免所有人都用 root 账号操作 AWS，从而降低安全风险。</p>
 <p>下面，我们通过几个步骤来完成 IAM 基础配置。</p>
 <hr>
-<h2 id="1️⃣-创建-IAM-用户"><a href="#1️⃣-创建-IAM-用户" class="headerlink" title="1️⃣ 创建 IAM 用户"></a>1️⃣ 创建 IAM 用户</h2><p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/1.png" alt="image-20250823140952412"></p>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/2.png" alt="image-20250823141052523"></p>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/3.png" alt="image-20250823141457856"></p>
+<h2 id="1️⃣-创建-IAM-用户"><a href="#1️⃣-创建-IAM-用户" class="headerlink" title="1️⃣ 创建 IAM 用户"></a>1️⃣ 创建 IAM 用户</h2><p><img src="/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/1.png" alt="image-20250823140952412"></p>
+<p><img src="/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/2.png" alt="image-20250823141052523"></p>
+<p><img src="/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/3.png" alt="image-20250823141457856"></p>
 <blockquote>
 <p>进入 IAM 控制台，选择 <strong>Add user</strong>。<br> 输入用户名（例如 <code>user</code>），选择 <strong>AWS Management Console access</strong>，并设置初始密码。<br> 这样，新建的用户就可以通过独立账号登录 AWS，而不用使用 root 账号。</p>
 </blockquote>
 <hr>
-<h2 id="2️⃣-创建用户组（Group）并分配权限"><a href="#2️⃣-创建用户组（Group）并分配权限" class="headerlink" title="2️⃣ 创建用户组（Group）并分配权限"></a>2️⃣ 创建用户组（Group）并分配权限</h2><p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/4.png" alt="image-20250823141638351"></p>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/5.png" alt="image-20250823142737262"></p>
-<blockquote>
-<p>最佳实践是通过 <strong>用户组来管理权限</strong>。<br> 例如，创建一个 <code>user-group</code> 组，然后为它附加策略 <code>AmazonEC2FullAccess</code>。<br> 这样，所有加入这个组的用户都能管理 EC2 实例，而不用逐个分配权限。</p>
-</blockquote>
-<hr>
-<h2 id="3️⃣-将用户加入用户组"><a href="#3️⃣-将用户加入用户组" class="headerlink" title="3️⃣ 将用户加入用户组"></a>3️⃣ 将用户加入用户组</h2><p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/6.png" alt="image-20250823142917774"></p>
-<blockquote>
-<p>接下来，把 <code>user</code> 加入 <code>user-group</code> 组。<br> 用户组的策略会立即生效，这样用户就继承了组的所有权限。</p>
-</blockquote>
-<hr>
-<h2 id="4️⃣-创建自定义策略（可选）"><a href="#4️⃣-创建自定义策略（可选）" class="headerlink" title="4️⃣ 创建自定义策略（可选）"></a>4️⃣ 创建自定义策略（可选）</h2><p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/7.png" alt="image-20250823143018500"></p>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/8.png" alt="image-20250823143215756"></p>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/9.png" alt="image-20250823143447696"></p>
-<p>示例策略（只允许启动&#x2F;停止 EC2）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;Version&quot;: &quot;2012-10-17&quot;,</span><br><span class="line">  &quot;Statement&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;Effect&quot;: &quot;Allow&quot;,</span><br><span class="line">      &quot;Action&quot;: [</span><br><span class="line">        &quot;ec2:StartInstances&quot;,</span><br><span class="line">        &quot;ec2:StopInstances&quot;</span><br><span class="line">      ],</span><br><span class="line">      &quot;Resource&quot;: &quot;*&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>讲解文案：</strong></p>
-<blockquote>
-<p>如果现有的托管策略不能满足需求，可以创建 <strong>自定义策略</strong>。<br> 上例中，用户只能启动和停止 EC2，而不能删除实例，这样能更精细地控制权限。</p>
-</blockquote>
-<hr>
-<h2 id="5️⃣-开启-MFA（手机扫码登录）"><a href="#5️⃣-开启-MFA（手机扫码登录）" class="headerlink" title="5️⃣ 开启 MFA（手机扫码登录）"></a>5️⃣ 开启 MFA（手机扫码登录）</h2><p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/10.png" alt="image-20250823143624508"></p>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/11.png" alt="image-20250823143708443"></p>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/12.png" alt="image-20250823144811925"></p>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/13.png" alt="image-20250823144843296"></p>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/14.png" alt="image-20250823145543385"></p>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAM%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/15.png" alt="image-20250823145825887"></p>
-<blockquote>
-<p>为了提高账号安全性，建议给 IAM 用户启用 <strong>MFA（多因素认证）</strong>。<br> 具体操作步骤：</p>
-<ol>
-<li>打开用户的 <strong>Security credentials</strong> 页面，点击 <strong>Assign MFA device</strong></li>
-<li>选择 <strong>Authenticator app（推荐）</strong>，系统会生成一个 <strong>二维码</strong></li>
-<li>打开手机上的 <strong>Google Authenticator、Microsoft Authenticator、1Password</strong> 等 TOTP 应用，<strong>扫码绑定</strong></li>
-<li>应用会生成一个动态的 6 位验证码（30 秒刷新一次）</li>
-<li>在 AWS 控制台输入两次连续的验证码，验证成功后绑定完成</li>
-</ol>
-</blockquote>
-<p>👉 之后，每次用该 IAM 用户登录 AWS 控制台时，除了输入密码，还需要输入手机上的验证码，相当于 <strong>手机扫码 + 动态口令登录</strong>，大大提高了账号安全性。</p>
-<hr>
-<h2 id="6️⃣-最佳实践小结"><a href="#6️⃣-最佳实践小结" class="headerlink" title="6️⃣ 最佳实践小结"></a>6️⃣ 最佳实践小结</h2><ul>
-<li>不要用 root 账号日常操作</li>
-<li>每个人都有自己的 IAM 用户</li>
-<li>使用用户组来批量管理权限</li>
-<li>给敏感操作配置 <strong>最小权限原则</strong></li>
-<li>开启 MFA，保证账号安全</li>
-</ul>
-
+<h2 id="2️⃣-创建用户组（Group）并分配权限"><a href="#2️⃣-创建用户组（Group）并分配权限" class="headerlink" title="2️⃣ 创建用户组（Group）并分配权限"></a>2️⃣ 创建用户组（Group）并分配权限</h2>
              
           </div>
         </div>
       <div class="post-footer">
+        
+        <div class="readmore"><a href="/2025/08/23/AWS%E4%B8%ADIAM%E3%80%81MFA-%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/">阅读全文 »</a></div>   
         
     </div>
     
