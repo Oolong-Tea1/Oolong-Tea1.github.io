@@ -159,7 +159,7 @@
 
   
   <div class="content">
-        <div><p><img src= "/img/loading.gif" data-src="/%5Cimages%5CS3%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80%5C0.jpeg" alt="image-20250828163755943"><br>Amazon S3 是企业最常用的云存储服务之一，用来存放日志、备份、业务文件甚至前端静态资源。<br> 然而，<strong>S3 存储桶误公开</strong> 是最常见的安全事故之一，许多企业因为错误配置导致敏感数据被所有人访问，造成严重后果。</p>
+        <div><p><img src= "/img/loading.gif" data-src="/images/S3%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80/0.jpeg" alt="image-20250828163755943"><br>Amazon S3 是企业最常用的云存储服务之一，用来存放日志、备份、业务文件甚至前端静态资源。<br> 然而，<strong>S3 存储桶误公开</strong> 是最常见的安全事故之一，许多企业因为错误配置导致敏感数据被所有人访问，造成严重后果。</p>
 <p>今天我们来手把手演示 <strong>如何正确配置 S3 存储桶权限</strong>，避免“裸奔”。</p>
 <span id="more"></span>
 
@@ -175,7 +175,7 @@
 </ul>
 </li>
 </ol>
-<p><img src= "/img/loading.gif" data-src="/%5Cimages%5CS3%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80%5C1.png" alt="image-20250828163755943"></p>
+<p><img src= "/img/loading.gif" data-src="/images/S3%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80/1.png" alt="image-20250828163755943"></p>
 <hr>
 <h2 id="二、创建存储桶时的权限配置"><a href="#二、创建存储桶时的权限配置" class="headerlink" title="二、创建存储桶时的权限配置"></a>二、创建存储桶时的权限配置</h2><ol>
 <li>打开 <strong>S3 控制台 → Create bucket</strong></li>
@@ -183,7 +183,7 @@
 <li>保持 <strong>Block Public Access（阻止公共访问）</strong> 全部勾选</li>
 <li>直接下一步</li>
 </ol>
-<p><img src= "/img/loading.gif" data-src="C:\Users\Administrator\Desktop\blog\b\S3存储桶权限配置实战：如何防止数据误公开\1.png" alt="image-20250828163755943"></p>
+<p><img src= "/img/loading.gif" data-src="/images/S3%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80/1.png" alt="image-20250828163755943"></p>
 <p>👉 <strong>说明</strong>：<br> 除非你明确需要托管静态网站，一般不要取消这个选项。</p>
 <hr>
 <h2 id="三、存储桶权限管理方式"><a href="#三、存储桶权限管理方式" class="headerlink" title="三、存储桶权限管理方式"></a>三、存储桶权限管理方式</h2><p>在 <strong>存储桶 → Permissions 标签</strong> 下，可以看到三种主要的权限配置方式：</p>
