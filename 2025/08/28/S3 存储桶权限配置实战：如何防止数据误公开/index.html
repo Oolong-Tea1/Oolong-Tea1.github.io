@@ -24,7 +24,7 @@
 
   
 
-  <title>SSH 连接服务器全攻略 | 王道长服务器 | 亚马逊云</title>
+  <title>S3 存储桶权限配置实战：如何防止数据误公开 | 王道长服务器 | 亚马逊云</title>
 
   
 
@@ -138,7 +138,7 @@
 
     
 <article id="post">
-  <div class="post-title">SSH 连接服务器全攻略</div>
+  <div class="post-title">S3 存储桶权限配置实战：如何防止数据误公开</div>
   
 <div class="post-meta">
     
@@ -147,7 +147,7 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">612 字</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">626 字</span>
            
         
           <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
@@ -159,98 +159,77 @@
 
   
   <div class="content">
-        <div><p>SSH（Secure Shell）是管理 Linux 服务器的标准方式，既能用于 <strong>AWS EC2</strong>，也能用于 <strong>普通物理机 &#x2F; VPS</strong>。本文将分两部分详细介绍。</p>
+        <div><p>Amazon S3 是企业最常用的云存储服务之一，用来存放日志、备份、业务文件甚至前端静态资源。<br> 然而，<strong>S3 存储桶误公开</strong> 是最常见的安全事故之一，许多企业因为错误配置导致敏感数据被所有人访问，造成严重后果。</p>
+<p>今天我们来手把手演示 <strong>如何正确配置 S3 存储桶权限</strong>，避免“裸奔”。</p>
 <span id="more"></span>
 
 <hr>
-<h2 id="一、AWS-EC2-实例-SSH-连接"><a href="#一、AWS-EC2-实例-SSH-连接" class="headerlink" title="一、AWS EC2 实例 SSH 连接"></a>一、AWS EC2 实例 SSH 连接</h2><h3 id="1-前提条件"><a href="#1-前提条件" class="headerlink" title="1. 前提条件"></a>1. 前提条件</h3><ul>
-<li>已启动一台 <strong>EC2 Linux 实例</strong>。</li>
-<li>创建时下载了 <strong>密钥对（.pem 文件）</strong>。</li>
-<li>本地安装了 SSH 客户端（Mac&#x2F;Linux 默认有，Windows 可用 PowerShell 或 PuTTY）。</li>
-</ul>
-<h3 id="2-获取实例公网-IP"><a href="#2-获取实例公网-IP" class="headerlink" title="2. 获取实例公网 IP"></a>2. 获取实例公网 IP</h3><ul>
-<li>进入 <strong>EC2 控制台 → Instances</strong></li>
-<li>查看 <strong>Public IPv4 address</strong>（如 <code>54.210.xx.xx</code>）。</li>
-</ul>
-<h3 id="3-调整密钥权限（Mac-Linux）"><a href="#3-调整密钥权限（Mac-Linux）" class="headerlink" title="3. 调整密钥权限（Mac&#x2F;Linux）"></a>3. 调整密钥权限（Mac&#x2F;Linux）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 400 my-key.pem</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-连接命令"><a href="#4-连接命令" class="headerlink" title="4. 连接命令"></a>4. 连接命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i my-key.pem ec2-user@54.210.xx.xx</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>-i my-key.pem</code> → 指定私钥文件</li>
-<li><code>ec2-user</code> → 默认用户名（Amazon Linux）。<ul>
-<li>Ubuntu → <code>ubuntu</code></li>
-<li>CentOS → <code>centos</code></li>
+<h2 id="一、S3-默认安全机制"><a href="#一、S3-默认安全机制" class="headerlink" title="一、S3 默认安全机制"></a>一、S3 默认安全机制</h2><ol>
+<li><strong>默认私有</strong><ul>
+<li>新建的 S3 存储桶默认只有创建者能访问。</li>
 </ul>
 </li>
-</ul>
-<p>成功后进入命令行界面：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ec2-user@ip-172-31-xx-xx ~]$</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-注意事项"><a href="#5-注意事项" class="headerlink" title="5. 注意事项"></a>5. 注意事项</h3><ul>
-<li>安全组需放行 **TCP 22 (SSH)**，来源设置为 <strong>My IP</strong>。</li>
-<li>用户名要和系统对应，否则报错 <code>Permission denied (publickey)</code>。</li>
-</ul>
-<hr>
-<h2 id="二、普通-Linux-服务器-SSH-连接"><a href="#二、普通-Linux-服务器-SSH-连接" class="headerlink" title="二、普通 Linux 服务器 SSH 连接"></a>二、普通 Linux 服务器 SSH 连接</h2><p>如果你使用的是 <strong>IDC 物理服务器</strong> 或 <strong>云厂商（阿里云、腾讯云、华为云等）</strong> 的 VPS，连接方式稍有不同：</p>
-<h3 id="1-获取服务器信息"><a href="#1-获取服务器信息" class="headerlink" title="1. 获取服务器信息"></a>1. 获取服务器信息</h3><ul>
-<li><strong>公网 IP</strong>（例如 <code>123.45.67.89</code>）。</li>
-<li><strong>用户名&#x2F;密码</strong> 或 <strong>私钥文件</strong>。</li>
-</ul>
-<h3 id="2-密码方式登录"><a href="#2-密码方式登录" class="headerlink" title="2. 密码方式登录"></a>2. 密码方式登录</h3><p>最常见的情况：厂商直接提供用户名和密码。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@123.45.67.89</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>root</code> 是默认管理员账户。</li>
-<li>系统会提示输入密码。</li>
-</ul>
-<h3 id="3-密钥方式登录"><a href="#3-密钥方式登录" class="headerlink" title="3. 密钥方式登录"></a>3. 密钥方式登录</h3><p>如果厂商提供了 <strong>私钥文件（.pem 或 .key）</strong>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 400 myserver.pem</span><br><span class="line">ssh -i myserver.pem root@123.45.67.89</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-Windows-用户（PuTTY）"><a href="#4-Windows-用户（PuTTY）" class="headerlink" title="4. Windows 用户（PuTTY）"></a>4. Windows 用户（PuTTY）</h3><ul>
-<li>直接输入 <strong>IP + 用户名</strong>，用密码登录；</li>
-<li>如果是密钥，则先用 PuTTYgen 转换成 <code>.ppk</code> 再登录。</li>
-</ul>
-<hr>
-<h2 id="三、常见问题排查"><a href="#三、常见问题排查" class="headerlink" title="三、常见问题排查"></a>三、常见问题排查</h2><table>
-<thead>
-<tr>
-<th>错误信息</th>
-<th>可能原因</th>
-<th>解决办法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>Permission denied (publickey)</code></td>
-<td>用户名错误 &#x2F; 私钥不匹配</td>
-<td>确认系统默认用户，检查密钥对</td>
-</tr>
-<tr>
-<td><code>Connection timed out</code></td>
-<td>防火墙或安全组未放行端口 22</td>
-<td>在云控制台放行 TCP 22</td>
-</tr>
-<tr>
-<td><code>UNPROTECTED PRIVATE KEY FILE!</code></td>
-<td>私钥文件权限过宽</td>
-<td><code>chmod 400 file.pem</code></td>
-</tr>
-<tr>
-<td>登录后中文乱码</td>
-<td>服务器缺少本地化设置</td>
-<td>安装 <code>locales</code> 包，设置 UTF-8</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><ul>
-<li><strong>AWS EC2</strong> → 通常用 <strong>密钥对（.pem 文件）</strong> 登录，用户名是 <code>ec2-user/ubuntu/...</code>。</li>
-<li><strong>普通服务器&#x2F;VPS</strong> → 多用 <strong>root + 密码</strong>，也支持密钥认证。</li>
-<li><strong>安全要点</strong>：<ul>
-<li>SSH 端口（22）只允许自己的 IP 访问。</li>
-<li>建议配置 <strong>MFA &#x2F; SSH Key</strong>，避免弱口令被暴力破解。</li>
+<li><strong>阻止公共访问（Block Public Access）</strong><ul>
+<li>AWS 提供了全局和存储桶级别的“阻止公共访问”选项。</li>
+<li>默认勾选，防止误操作。</li>
 </ul>
 </li>
+</ol>
+<p><img src= "/img/loading.gif" data-src="/%5Cimages%5CS3%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80%5C1.png" alt="image-20250828163755943"></p>
+<hr>
+<h2 id="二、创建存储桶时的权限配置"><a href="#二、创建存储桶时的权限配置" class="headerlink" title="二、创建存储桶时的权限配置"></a>二、创建存储桶时的权限配置</h2><ol>
+<li>打开 <strong>S3 控制台 → Create bucket</strong></li>
+<li>输入存储桶名称，选择区域</li>
+<li>保持 <strong>Block Public Access（阻止公共访问）</strong> 全部勾选</li>
+<li>直接下一步</li>
+</ol>
+<p><img src= "/img/loading.gif" data-src="C:\Users\Administrator\Desktop\blog\b\S3存储桶权限配置实战：如何防止数据误公开\1.png" alt="image-20250828163755943"></p>
+<p>👉 <strong>说明</strong>：<br> 除非你明确需要托管静态网站，一般不要取消这个选项。</p>
+<hr>
+<h2 id="三、存储桶权限管理方式"><a href="#三、存储桶权限管理方式" class="headerlink" title="三、存储桶权限管理方式"></a>三、存储桶权限管理方式</h2><p>在 <strong>存储桶 → Permissions 标签</strong> 下，可以看到三种主要的权限配置方式：</p>
+<ol>
+<li><strong>存储桶策略（Bucket Policy）</strong><ul>
+<li>JSON 格式，灵活但容易误操作。</li>
+<li>例子：可以只允许某个 IAM 角色访问。</li>
 </ul>
+</li>
+<li><strong>访问控制列表（ACL）</strong><ul>
+<li>早期功能，AWS 已不推荐使用。</li>
+</ul>
+</li>
+<li><strong>IAM 策略</strong><ul>
+<li>在用户&#x2F;角色层面控制访问，安全性更高。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="四、常见误区：Public-Bucket"><a href="#四、常见误区：Public-Bucket" class="headerlink" title="四、常见误区：Public Bucket"></a>四、常见误区：Public Bucket</h2><p>很多安全事故来自于用户在 Bucket Policy 中写了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;Version&quot;: &quot;2012-10-17&quot;,</span><br><span class="line">  &quot;Statement&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;Effect&quot;: &quot;Allow&quot;,</span><br><span class="line">      &quot;Principal&quot;: &quot;*&quot;,</span><br><span class="line">      &quot;Action&quot;: &quot;s3:GetObject&quot;,</span><br><span class="line">      &quot;Resource&quot;: &quot;arn:aws:s3:::mybucket/*&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这意味着 <strong>任何人都能访问存储桶中的文件</strong>！<br> AWS 控制台会在你保存时警告：<code>This bucket has public access</code>。</p>
+<hr>
+<h2 id="五、最佳实践"><a href="#五、最佳实践" class="headerlink" title="五、最佳实践"></a>五、最佳实践</h2><ol>
+<li>始终保持 <strong>Block Public Access</strong> 全部勾选。</li>
+<li>如果需要对外公开文件，建议：<ul>
+<li>使用 <strong>预签名 URL（Presigned URL）</strong></li>
+<li>或者托管在 <strong>CloudFront CDN</strong>，再设置访问控制。</li>
+</ul>
+</li>
+<li>定期使用以下工具检查安全：<ul>
+<li><strong>Amazon Macie</strong> → 自动发现敏感数据</li>
+<li><strong>Trusted Advisor</strong> → 扫描公共访问风险</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><ul>
+<li>S3 默认是私有的，但配置不当可能导致数据裸奔。</li>
+<li>千万不要轻易取消 Block Public Access。</li>
+<li>最佳做法是通过 IAM 控制访问，而不是开放存储桶本身。</li>
+</ul>
+<blockquote>
+<p>✅ 建议：今天就去检查一下你现有的存储桶，确认“阻止公共访问”是否开启。</p>
+</blockquote>
 </div>
         
           <div class="post-copyright">
@@ -258,7 +237,7 @@
                       <span> 作者: 王道长</span>
                   </div>
                   <div class="copyright-item">
-                      <span> 链接: <a href="http://example.com/2025/08/27/SSH%20%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A8%E6%94%BB%E7%95%A5/">http://example.com/2025/08/27/SSH%20%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A8%E6%94%BB%E7%95%A5/</a></span>
+                      <span> 链接: <a href="http://example.com/2025/08/28/S3%20%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80/">http://example.com/2025/08/28/S3%20%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80/</a></span>
                   </div>
                   <div class="copyright-item">
                       <span> 声明: 本博客所有文章除特别声明外，均采用许可协议 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 转载请注明出处！</span>
@@ -286,13 +265,9 @@
     </div>
     <div class="post-nav">
       
-        <div class="post-nav-prev post-nav-item">
-            <a href="/2025/08/28/S3%20%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80/" >S3 存储桶权限配置实战：如何防止数据误公开<i class="fa fa-chevron-left"></i></a>
-        </div>
-      
       
         <div class="post-nav-next post-nav-item">
-            <a href="/2025/08/26/AWS%20%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/" >AWS 配额与申请扩展指南<i class="fa fa-chevron-right"></i></a>
+            <a href="/2025/08/27/SSH%20%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A8%E6%94%BB%E7%95%A5/" >SSH 连接服务器全攻略<i class="fa fa-chevron-right"></i></a>
         </div>
       
     </div>
