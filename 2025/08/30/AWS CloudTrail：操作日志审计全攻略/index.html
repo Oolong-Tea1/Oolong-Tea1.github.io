@@ -24,7 +24,7 @@
 
   
 
-  <title>王道长服务器 | 亚马逊云</title>
+  <title>AWS CloudTrail：操作日志审计全攻略 | 王道长服务器 | 亚马逊云</title>
 
   
 
@@ -137,80 +137,143 @@
 </header>
 
     
-<article class="post-wrap page">
-    <h1 class="pagetitle"></h1>
-    <section class="content">
+<article id="post">
+  <div class="post-title">AWS CloudTrail：操作日志审计全攻略</div>
+  
+<div class="post-meta">
+    
+     
+     
+    
+     <div class="post-meta-item wordcount">
         
-                <h1 id="AWS-配额与申请扩展指南"><a href="#AWS-配额与申请扩展指南" class="headerlink" title="AWS 配额与申请扩展指南"></a>AWS 配额与申请扩展指南</h1><p>在日常使用 AWS 的过程中，你可能会遇到这样的问题：</p>
-<ul>
-<li>想要启动更多的 EC2 实例，却提示“配额不足”；</li>
-<li>想创建多个弹性 IP（EIP），结果发现最多只能有 5 个；</li>
-<li>部署多个环境时，VPC 数量受限。</li>
-</ul>
-<p>这些情况其实都是 <strong>AWS 配额（Service Quotas）</strong> 的限制。本文将带你全面理解配额，并手把手教你如何申请扩展。</p>
-<hr>
-<h2 id="一、什么是-AWS-配额（Service-Quotas）"><a href="#一、什么是-AWS-配额（Service-Quotas）" class="headerlink" title="一、什么是 AWS 配额（Service Quotas）"></a>一、什么是 AWS 配额（Service Quotas）</h2><p>AWS 配额指的是 <strong>AWS 账号在某个服务下能使用的最大资源数量或速率</strong>。</p>
-<ul>
-<li><strong>软限制（Soft Limit）</strong>：默认值较低，可以申请提升（例如 EC2 实例数量、EIP 数量）。</li>
-<li><strong>硬限制（Hard Limit）</strong>：无法提升，受 AWS 架构约束（例如单个安全组最多规则数）。</li>
-</ul>
-<h3 id="常见默认配额示例："><a href="#常见默认配额示例：" class="headerlink" title="常见默认配额示例："></a>常见默认配额示例：</h3><ul>
-<li><strong>EC2</strong>：单个区域内默认 20 个实例</li>
-<li><strong>EIP</strong>：每个区域最多 5 个</li>
-<li><strong>VPC</strong>：每个区域默认 5 个</li>
-<li><strong>RDS</strong>：默认最多 40 个数据库实例</li>
-</ul>
-<p>👉 不同服务、不同区域的配额各不相同。</p>
-<hr>
-<h2 id="二、为什么要关注配额"><a href="#二、为什么要关注配额" class="headerlink" title="二、为什么要关注配额"></a>二、为什么要关注配额</h2><ol>
-<li><strong>避免上线受阻</strong>：如果在业务高峰时才发现资源不够用，会严重影响进度。</li>
-<li><strong>合理规划架构</strong>：提前了解配额，能避免因限制导致的部署失败。</li>
-<li><strong>企业合规需求</strong>：大规模应用通常会涉及数十个 VPC、上百个实例，需要提前扩容。</li>
-</ol>
-<hr>
-<h2 id="三、如何查看当前配额"><a href="#三、如何查看当前配额" class="headerlink" title="三、如何查看当前配额"></a>三、如何查看当前配额</h2><p>AWS 提供了 <strong>Service Quotas 控制台</strong>，你可以在里面查看和管理所有服务的配额。</p>
-<h3 id="操作步骤："><a href="#操作步骤：" class="headerlink" title="操作步骤："></a>操作步骤：</h3><p><img src= "/img/loading.gif" data-src="C:\Users\Administrator\Desktop\blog\b\AWS配额与申请扩展指南\1.png" alt="image-20250826111831747"></p>
-<ol>
-<li>登录 AWS 控制台，搜索并进入 <strong>Service Quotas</strong>。</li>
-<li>选择需要查看的服务，例如 <strong>EC2</strong>。</li>
-<li>在列表中即可看到该服务的配额详情（名称、默认值、可否调整）。</li>
-</ol>
-<hr>
-<h2 id="四、如何申请提升配额"><a href="#四、如何申请提升配额" class="headerlink" title="四、如何申请提升配额"></a>四、如何申请提升配额</h2><p>如果你发现某个配额不足，可以通过控制台发起申请。</p>
-<p>建议是在全英文界面下进行申请。</p>
-<h3 id="操作步骤：-1"><a href="#操作步骤：-1" class="headerlink" title="操作步骤："></a>操作步骤：</h3><p><img src= "/img/loading.gif" data-src="C:\Users\Administrator\Desktop\blog\b\AWS配额与申请扩展指南\2.png" alt="image-20250826112444750"></p>
-<p><img src= "/img/loading.gif" data-src="C:\Users\Administrator\Desktop\blog\b\AWS配额与申请扩展指南\3.png" alt="image-20250826112525853"></p>
-<ol>
-<li>打开 <strong>Service Quotas</strong> → 进入目标服务（例如 EC2）。</li>
-<li>找到要扩展的配额（如 Running On-Demand Standard instances）。</li>
-<li>点击 <strong>Request quota increase</strong>。</li>
-<li>输入目标值（如从 20 提升到 50）。</li>
-<li>提交申请后，AWS 会自动生成支持工单，等待审批。</li>
-</ol>
-<hr>
-<h2 id="五、常见的需要提升的配额场景"><a href="#五、常见的需要提升的配额场景" class="headerlink" title="五、常见的需要提升的配额场景"></a>五、常见的需要提升的配额场景</h2><ul>
-<li><strong>EC2 实例数</strong>：企业级应用需要更多计算节点</li>
-<li><strong>EIP 数量</strong>：多环境、多服务的公网访问需求</li>
-<li><strong>VPC 数量</strong>：多租户架构或区域隔离部署</li>
-<li><strong>CloudFormation 堆栈资源限制</strong>：大规模自动化部署时常遇到</li>
-</ul>
-<hr>
-<h2 id="六、最佳实践"><a href="#六、最佳实践" class="headerlink" title="六、最佳实践"></a>六、最佳实践</h2><ol>
-<li><strong>提前申请</strong><br> 在业务上线前至少一周提交扩容申请，避免紧急情况。</li>
-<li><strong>注意区域性</strong><br> 配额是按 <strong>Region</strong> 区分的，比如东京区域的配额扩展不会影响新加坡区域。</li>
-<li><strong>监控与自动化</strong><br> 使用 <strong>Service Quotas API</strong> 或 <strong>CloudWatch</strong> 定期检查配额，避免超限。</li>
-<li><strong>企业支持计划</strong><br> 建议启用 <strong>Business&#x2F;Enterprise Support</strong>，审批速度更快，更适合大规模团队。</li>
-</ol>
-<hr>
-<h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h2><ul>
-<li><strong>配额是 AWS 的资源使用上限</strong>，既是保护机制，也是规划依据。</li>
-<li><strong>查看 → 申请 → 扩展</strong> 是标准流程，通常 1–2 天内即可完成。</li>
-<li>建议所有团队在正式部署前 <strong>预估配额需求并提前申请</strong>，避免生产环境卡壳。</li>
-</ul>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">664 字</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
+                               
+      </div>
+     
+</div>
 
+
+  
+  <div class="content">
+        <div><p>![0](&#x2F;images&#x2F;AWS CloudTrail：操作日志审计全攻略&#x2F;0.jpeg)</p>
+<p>在 AWS 中，安全不仅仅是防止黑客攻击，更重要的是 <strong>“知道谁在你的账号里做了什么”</strong>。<br> 这就是 <strong>CloudTrail</strong> 的作用 —— 它记录你账号里所有的 API 调用和控制台操作，是 AWS 的“黑匣子”。</p>
+<hr>
+<h2 id="1️⃣-什么是-CloudTrail？"><a href="#1️⃣-什么是-CloudTrail？" class="headerlink" title="1️⃣ 什么是 CloudTrail？"></a>1️⃣ 什么是 CloudTrail？</h2><ul>
+<li>CloudTrail &#x3D; <strong>操作日志审计服务</strong></li>
+<li>它会记录：<ul>
+<li>谁（用户&#x2F;角色&#x2F;服务）</li>
+<li>在什么时候</li>
+<li>在哪个区域</li>
+<li>对哪个资源</li>
+<li>执行了什么操作</li>
+</ul>
+</li>
+</ul>
+<p>📌 举例：</p>
+<ul>
+<li>你在控制台 <strong>创建了一个安全组</strong> → CloudTrail 会记录“CreateSecurityGroup”事件</li>
+<li>你用 CLI 执行 <code>aws s3 ls</code> → CloudTrail 会记录“ListBuckets”事件</li>
+</ul>
+<p>👉 换句话说，CloudTrail &#x3D; AWS 的“监控摄像头”。</p>
+<hr>
+<h2 id="2️⃣-CloudTrail-默认记录什么？"><a href="#2️⃣-CloudTrail-默认记录什么？" class="headerlink" title="2️⃣ CloudTrail 默认记录什么？"></a>2️⃣ CloudTrail 默认记录什么？</h2><ul>
+<li><strong>Event history（过去 90 天）</strong> → 免费</li>
+<li>记录所有 <strong>管理事件（Management Events）</strong>，比如：<ul>
+<li>IAM 用户登录</li>
+<li>修改安全组</li>
+<li>创建&#x2F;删除 EC2、S3 等资源</li>
+</ul>
+</li>
+</ul>
+<p>![image-20250830140216923](&#x2F;images&#x2F;AWS CloudTrail：操作日志审计全攻略&#x2F;1.png)</p>
+<hr>
+<h2 id="3️⃣-如何使用-Event-History-查看操作记录"><a href="#3️⃣-如何使用-Event-History-查看操作记录" class="headerlink" title="3️⃣ 如何使用 Event History 查看操作记录"></a>3️⃣ 如何使用 Event History 查看操作记录</h2><ol>
+<li>打开 <strong>CloudTrail 控制台</strong></li>
+<li>左侧菜单 → 点击 <strong>Event history</strong></li>
+<li>在搜索框输入：<ul>
+<li><code>Event name</code>（操作，比如 CreateUser）</li>
+<li><code>Username</code>（谁操作的）</li>
+<li><code>Resource type</code>（资源类型，比如 AWS::EC2::Instance）</li>
+</ul>
+</li>
+</ol>
+<p>![image-20250830140302072](&#x2F;images&#x2F;AWS CloudTrail：操作日志审计全攻略&#x2F;2.png)</p>
+<p>👉 解释：点开某条记录，可以看到 <strong>时间戳、来源 IP、请求参数</strong>，这对排查问题特别重要。</p>
+<hr>
+<h2 id="4️⃣-CloudTrail-Trail（长期存储）"><a href="#4️⃣-CloudTrail-Trail（长期存储）" class="headerlink" title="4️⃣ CloudTrail Trail（长期存储）"></a>4️⃣ CloudTrail Trail（长期存储）</h2><p>默认 90 天日志可能不够，所以 AWS 提供 <strong>Trail</strong> 功能：</p>
+<ul>
+<li>你可以新建一个 <strong>Trail</strong>，把日志存到 <strong>S3 存储桶</strong>，甚至推送到 <strong>CloudWatch Logs</strong></li>
+<li>好处：<ul>
+<li>永久保存</li>
+<li>可以用 Athena&#x2F;Glue 查询日志</li>
+<li>配合 SIEM 系统做安全审计</li>
+</ul>
+</li>
+</ul>
+<p>![image-20250830140411971](&#x2F;images&#x2F;AWS CloudTrail：操作日志审计全攻略&#x2F;3.png)</p>
+<hr>
+<h2 id="5️⃣-实际应用场景"><a href="#5️⃣-实际应用场景" class="headerlink" title="5️⃣ 实际应用场景"></a>5️⃣ 实际应用场景</h2><ul>
+<li><strong>安全审计</strong>：谁删除了生产数据库？</li>
+<li><strong>合规要求</strong>：满足 ISO 27001、PCI-DSS、GDPR 等审计需要。</li>
+<li><strong>故障排查</strong>：服务异常时，能快速确认是不是误操作。</li>
+<li><strong>内部追责</strong>：哪个团队成员误删了安全组？</li>
+</ul>
+<hr>
+<h2 id="6️⃣-最佳实践"><a href="#6️⃣-最佳实践" class="headerlink" title="6️⃣ 最佳实践"></a>6️⃣ 最佳实践</h2><p>✅ 始终开启 CloudTrail（默认已经有 Event history）<br> ✅ 建议创建一个 Trail，把日志存到 S3<br> ✅ 给 S3 存储桶加上 <strong>MFA Delete</strong>，防止日志被恶意删除<br> ✅ 配合 <strong>CloudWatch Alarm</strong>，在检测到敏感操作时立即告警</p>
+<hr>
+<h2 id="🔚-总结"><a href="#🔚-总结" class="headerlink" title="🔚 总结"></a>🔚 总结</h2><ul>
+<li>CloudTrail &#x3D; AWS 的黑匣子</li>
+<li>免费的 Event history 就能帮你追踪 90 天内所有操作</li>
+<li>建 Trail 存到 S3，可以满足长期审计和合规要求</li>
+<li>对于企业，CloudTrail 是安全运维必备工具</li>
+</ul>
+<p>📌 <strong>下次你账号出问题，不要慌，先去 CloudTrail 查一查。</strong></p>
+</div>
         
-     </section>
+          <div class="post-copyright">
+                  <div class="copyright-item">
+                      <span> 作者: 王道长</span>
+                  </div>
+                  <div class="copyright-item">
+                      <span> 链接: <a href="http://example.com/2025/08/30/AWS%20CloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/">http://example.com/2025/08/30/AWS%20CloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/</a></span>
+                  </div>
+                  <div class="copyright-item">
+                      <span> 声明: 本博客所有文章除特别声明外，均采用许可协议 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 转载请注明出处！</span>
+                  </div>
+          </div>
         
+  </div>
+
+  <div class="share-reward">
+    <div class="share">
+        
+<div class="social-share" data-sites="facebook,twitter,wechat,weibo,qq"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script>
+
+
+      </div>
+        <div class="reward">
+          
+        </div>
+    </div>
+    
+    <div class="post_tags">
+      
+    </div>
+    <div class="post-nav">
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/2025/08/28/S3%20%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80/" >S3 存储桶权限配置实战：如何防止数据误公开<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
 
 
 
@@ -236,9 +299,6 @@
   
 
 </article>
-
-
-
 
     
 <a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
