@@ -24,7 +24,7 @@
 
   
 
-  <title>归档 | 王道长服务器 | 亚马逊云</title>
+  <title>王道长服务器 | 亚马逊云</title>
 
   
 
@@ -137,74 +137,108 @@
 </header>
 
     
-<div class="post-wrap archive">
-    
-    
+<article class="post-wrap page">
+    <h1 class="pagetitle"></h1>
+    <section class="content">
         
-        
-        <div class="yearzodiac">
-                <div class="years">
-                  <h1>2025  <i class="symbolic-animals icon-snake"></i></h1>
-                </div>
-        </div>
-        
-        <li class="archive-item">
-            <a class="archive-item-link" href="/2025/09/02/AWS%20IAM%20Access%20Analyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">AWS IAM Access Analyzer：权限分析实战</a>
-            <span class="archive-item-date">2025-09-02</span>
-        </li>
-    
-        
-        
-        <li class="archive-item">
-            <a class="archive-item-link" href="/2025/08/30/AWS%20CloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/">AWS CloudTrail：操作日志审计全攻略</a>
-            <span class="archive-item-date">2025-08-30</span>
-        </li>
-    
-        
-        
-        <li class="archive-item">
-            <a class="archive-item-link" href="/2025/08/28/S3%20%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80/">S3 存储桶权限配置实战：如何防止数据误公开</a>
-            <span class="archive-item-date">2025-08-28</span>
-        </li>
-    
-        
-        
-        <li class="archive-item">
-            <a class="archive-item-link" href="/2025/08/27/SSH%20%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A8%E6%94%BB%E7%95%A5/">SSH 连接服务器全攻略</a>
-            <span class="archive-item-date">2025-08-27</span>
-        </li>
-    
-        
-        
-        <li class="archive-item">
-            <a class="archive-item-link" href="/2025/08/26/AWS%20%E9%85%8D%E9%A2%9D%E4%B8%8E%E7%94%B3%E8%AF%B7%E6%89%A9%E5%B1%95%E6%8C%87%E5%8D%97/">AWS 配额与申请扩展指南</a>
-            <span class="archive-item-date">2025-08-26</span>
-        </li>
-    
-        
-        
-        <li class="archive-item">
-            <a class="archive-item-link" href="/2025/08/25/AWS%20%E6%95%99%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84%20EC2%20%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/">AWS 教程：如何升级正在使用的 EC2 实例配置</a>
-            <span class="archive-item-date">2025-08-25</span>
-        </li>
-    
-        
-        
-        <li class="archive-item">
-            <a class="archive-item-link" href="/2025/08/23/AWS%E4%B8%ADIAM%E3%80%81MFA-%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/">AWS 中 IAM MFA 设置教程：从零开始管理用户与权限~</a>
-            <span class="archive-item-date">2025-08-23</span>
-        </li>
-    
-    <div class="arc_pag">
-       <nav class="paginator">
-      
-            
-</nav>
+                <h1 id="AWS-IAM-Access-Analyzer：权限分析实战"><a href="#AWS-IAM-Access-Analyzer：权限分析实战" class="headerlink" title="AWS IAM Access Analyzer：权限分析实战"></a>AWS IAM Access Analyzer：权限分析实战</h1><p>在云上运维中，安全的核心是 <strong>权限控制</strong>。<br> 即便我们给资源加了 IAM 策略或安全组，也难以确认 <strong>“是不是意外对外开放了？”</strong>。</p>
+<p>AWS 提供的 <strong>IAM Access Analyzer</strong> 就是用来解决这个问题的 —— 它能自动分析账号中的 IAM 策略，告诉你资源是否被外部实体访问。</p>
+<hr>
+<h2 id="1️⃣-什么是-IAM-Access-Analyzer？"><a href="#1️⃣-什么是-IAM-Access-Analyzer？" class="headerlink" title="1️⃣ 什么是 IAM Access Analyzer？"></a>1️⃣ 什么是 IAM Access Analyzer？</h2><ul>
+<li>IAM Access Analyzer 是 AWS 提供的 <strong>自动化权限分析工具</strong></li>
+<li>它会扫描你的 <strong>IAM 策略</strong>，检查是否允许外部访问（比如：<ul>
+<li>S3 存储桶对所有人可读？</li>
+<li>KMS 密钥是否被外部账号使用？</li>
+<li>IAM 角色是否能被第三方 Assume？</li>
+</ul>
+</li>
+</ul>
+<p>📌 一句话：Access Analyzer &#x3D; 帮你找出“资源是否被外部共享”。</p>
+<hr>
+<h2 id="2️⃣-支持的资源类型"><a href="#2️⃣-支持的资源类型" class="headerlink" title="2️⃣ 支持的资源类型"></a>2️⃣ 支持的资源类型</h2><p>目前 IAM Access Analyzer 能分析的资源包括：</p>
+<ul>
+<li><strong>S3 存储桶</strong></li>
+<li><strong>IAM 角色</strong></li>
+<li><strong>KMS 密钥</strong></li>
+<li><strong>Lambda 函数 &amp; Layer</strong></li>
+<li><strong>SQS 队列</strong></li>
+<li><strong>Secrets Manager</strong></li>
+</ul>
+<hr>
+<h2 id="3️⃣-如何使用-IAM-Access-Analyzer"><a href="#3️⃣-如何使用-IAM-Access-Analyzer" class="headerlink" title="3️⃣ 如何使用 IAM Access Analyzer"></a>3️⃣ 如何使用 IAM Access Analyzer</h2><h3 id="第一步：进入控制台"><a href="#第一步：进入控制台" class="headerlink" title="第一步：进入控制台"></a>第一步：进入控制台</h3><ul>
+<li>打开 <strong>IAM 控制台</strong> → 左侧选择 <strong>Access Analyzer</strong></li>
+</ul>
+<p>![image-20250902135128882](C:\Users\Administrator\Desktop\blog\b\AWS IAM Access Analyzer：权限分析实战\1.png)</p>
+<hr>
+<h3 id="第二步：创建-Analyzer"><a href="#第二步：创建-Analyzer" class="headerlink" title="第二步：创建 Analyzer"></a>第二步：创建 Analyzer</h3><ul>
+<li>点击 <strong>Create analyzer</strong></li>
+<li>选择类型：<ul>
+<li><strong>Account</strong>（分析整个账号的外部访问）</li>
+<li><strong>Organization</strong>（如果你用 Organizations，可以分析整个组织）</li>
+</ul>
+</li>
+<li>填写名称，比如：<code>MySecurityAnalyzer</code></li>
+</ul>
+<p>![image-20250902135210200](C:\Users\Administrator\Desktop\blog\b\AWS IAM Access Analyzer：权限分析实战\2.png)</p>
+<hr>
+<h3 id="第三步：查看分析结果"><a href="#第三步：查看分析结果" class="headerlink" title="第三步：查看分析结果"></a>第三步：查看分析结果</h3><ul>
+<li>创建后，Analyzer 会自动开始扫描</li>
+<li>如果检测到有外部访问，会在 <strong>Findings</strong> 列表里显示</li>
+<li>每条 Finding 都有详情，比如：<ul>
+<li>资源类型：S3 Bucket</li>
+<li>外部实体：<code>arn:aws:iam::123456789012:role/ExampleRole</code></li>
+<li>允许的操作：<code>s3:GetObject</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4️⃣-实际应用场景"><a href="#4️⃣-实际应用场景" class="headerlink" title="4️⃣ 实际应用场景"></a>4️⃣ 实际应用场景</h2><ul>
+<li><strong>S3 存储桶是否公开</strong></li>
+<li><strong>IAM 角色是否能被外部 Assume</strong></li>
+<li><strong>KMS 密钥是否被共享给外部账号</strong></li>
+<li><strong>合规审计：证明资源权限受控</strong></li>
+</ul>
+<hr>
+<h2 id="5️⃣-最佳实践"><a href="#5️⃣-最佳实践" class="headerlink" title="5️⃣ 最佳实践"></a>5️⃣ 最佳实践</h2><p>✅ 在每个账号里创建至少一个 Analyzer（建议 <strong>全局区域 us-east-1</strong>）<br> ✅ 定期检查 Findings，确认是否是预期行为<br> ✅ 对非预期的 Findings：</p>
+<ul>
+<li>修改策略 → 限制访问</li>
+<li>标记为 Resolved（已修复）<br> ✅ 配合 <strong>CloudWatch Events</strong>，在检测到新 Findings 时自动触发告警</li>
+</ul>
+<hr>
+<h2 id="🔚-总结"><a href="#🔚-总结" class="headerlink" title="🔚 总结"></a>🔚 总结</h2><ul>
+<li>IAM Access Analyzer 是 AWS 提供的 <strong>权限体检工具</strong></li>
+<li>它能帮你自动发现“意外对外开放”的资源</li>
+<li>创建 Analyzer 免费，检查结果也免费，非常适合日常安全运维</li>
+</ul>
 
-     </div>
-</div>
+        
+     </section>
+        
 
 
+
+  <div id="valine"></div>
+  <script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+        new Valine({
+          el: '#valine',
+          appId: "",
+          appKey: "",
+          avatar: "mm",
+          lang: "",
+          meta: 'nick,mail,link'.split(','),
+          requiredFields: 'nick,mail'.split(','),
+          placeholder: "评论记得带上邮箱,你的留言我会马上收到邮箱提醒哒",
+          pageSize:'10',
+          recordIP: 'false',
+          serverURLs: "",
+          emojiCDN: "",
+          enableQQ: "true",
+        });
+  </script>
+  
+
+</article>
 
 
 

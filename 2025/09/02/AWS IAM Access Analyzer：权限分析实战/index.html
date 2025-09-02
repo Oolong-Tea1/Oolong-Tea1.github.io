@@ -24,7 +24,7 @@
 
   
 
-  <title>AWS CloudTrail：操作日志审计全攻略 | 王道长服务器 | 亚马逊云</title>
+  <title>AWS IAM Access Analyzer：权限分析实战 | 王道长服务器 | 亚马逊云</title>
 
   
 
@@ -138,7 +138,7 @@
 
     
 <article id="post">
-  <div class="post-title">AWS CloudTrail：操作日志审计全攻略</div>
+  <div class="post-title">AWS IAM Access Analyzer：权限分析实战</div>
   
 <div class="post-meta">
     
@@ -147,7 +147,7 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">589 字</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">559 字</span>
            
         
           <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
@@ -159,79 +159,76 @@
 
   
   <div class="content">
-        <div><p><img src= "/img/loading.gif" data-src="/images/AWSCloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/0.jpeg" alt="0"></p>
-<p>在 AWS 中，安全不仅仅是防止黑客攻击，更重要的是 <strong>“知道谁在你的账号里做了什么”</strong>。<br> 这就是 <strong>CloudTrail</strong> 的作用 —— 它记录你账号里所有的 API 调用和控制台操作，是 AWS 的“黑匣子”。</p>
+        <div><p><img src= "/img/loading.gif" data-src="/images/AWSIAMAccessAnalyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/0.jpeg" alt="image (41)"></p>
+<p>在云上运维中，安全的核心是 <strong>权限控制</strong>。<br> 即便我们给资源加了 IAM 策略或安全组，也难以确认 <strong>“是不是意外对外开放了？”</strong>。</p>
+<p>AWS 提供的 <strong>IAM Access Analyzer</strong> 就是用来解决这个问题的 —— 它能自动分析账号中的 IAM 策略，告诉你资源是否被外部实体访问。</p>
 <hr>
-<h2 id="1️⃣-什么是-CloudTrail？"><a href="#1️⃣-什么是-CloudTrail？" class="headerlink" title="1️⃣ 什么是 CloudTrail？"></a>1️⃣ 什么是 CloudTrail？</h2><ul>
-<li>CloudTrail &#x3D; <strong>操作日志审计服务</strong></li>
-<li>它会记录：<ul>
-<li>谁（用户&#x2F;角色&#x2F;服务）</li>
-<li>在什么时候</li>
-<li>在哪个区域</li>
-<li>对哪个资源</li>
-<li>执行了什么操作</li>
+<h2 id="1️⃣-什么是-IAM-Access-Analyzer？"><a href="#1️⃣-什么是-IAM-Access-Analyzer？" class="headerlink" title="1️⃣ 什么是 IAM Access Analyzer？"></a>1️⃣ 什么是 IAM Access Analyzer？</h2><ul>
+<li>IAM Access Analyzer 是 AWS 提供的 <strong>自动化权限分析工具</strong></li>
+<li>它会扫描你的 <strong>IAM 策略</strong>，检查是否允许外部访问（比如：<ul>
+<li>S3 存储桶对所有人可读？</li>
+<li>KMS 密钥是否被外部账号使用？</li>
+<li>IAM 角色是否能被第三方 Assume？</li>
 </ul>
 </li>
 </ul>
-<p>📌 举例：</p>
+<p>📌 一句话：Access Analyzer &#x3D; 帮你找出“资源是否被外部共享”。</p>
+<hr>
+<h2 id="2️⃣-支持的资源类型"><a href="#2️⃣-支持的资源类型" class="headerlink" title="2️⃣ 支持的资源类型"></a>2️⃣ 支持的资源类型</h2><p>目前 IAM Access Analyzer 能分析的资源包括：</p>
 <ul>
-<li>你在控制台 <strong>创建了一个安全组</strong> → CloudTrail 会记录“CreateSecurityGroup”事件</li>
-<li>你用 CLI 执行 <code>aws s3 ls</code> → CloudTrail 会记录“ListBuckets”事件</li>
+<li><strong>S3 存储桶</strong></li>
+<li><strong>IAM 角色</strong></li>
+<li><strong>KMS 密钥</strong></li>
+<li><strong>Lambda 函数 &amp; Layer</strong></li>
+<li><strong>SQS 队列</strong></li>
+<li><strong>Secrets Manager</strong></li>
 </ul>
-<p>👉 换句话说，CloudTrail &#x3D; AWS 的“监控摄像头”。</p>
 <hr>
-<h2 id="2️⃣-CloudTrail-默认记录什么？"><a href="#2️⃣-CloudTrail-默认记录什么？" class="headerlink" title="2️⃣ CloudTrail 默认记录什么？"></a>2️⃣ CloudTrail 默认记录什么？</h2><ul>
-<li><strong>Event history（过去 90 天）</strong> → 免费</li>
-<li>记录所有 <strong>管理事件（Management Events）</strong>，比如：<ul>
-<li>IAM 用户登录</li>
-<li>修改安全组</li>
-<li>创建&#x2F;删除 EC2、S3 等资源</li>
+<h2 id="3️⃣-如何使用-IAM-Access-Analyzer"><a href="#3️⃣-如何使用-IAM-Access-Analyzer" class="headerlink" title="3️⃣ 如何使用 IAM Access Analyzer"></a>3️⃣ 如何使用 IAM Access Analyzer</h2><h3 id="第一步：进入控制台"><a href="#第一步：进入控制台" class="headerlink" title="第一步：进入控制台"></a>第一步：进入控制台</h3><ul>
+<li>打开 <strong>IAM 控制台</strong> → 左侧选择 <strong>Access Analyzer</strong></li>
+</ul>
+<p><img src= "/img/loading.gif" data-src="/images/AWSIAMAccessAnalyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/1.png" alt="image-20250902135128882"></p>
+<hr>
+<h3 id="第二步：创建-Analyzer"><a href="#第二步：创建-Analyzer" class="headerlink" title="第二步：创建 Analyzer"></a>第二步：创建 Analyzer</h3><ul>
+<li>点击 <strong>Create analyzer</strong></li>
+<li>选择类型：<ul>
+<li><strong>Account</strong>（分析整个账号的外部访问）</li>
+<li><strong>Organization</strong>（如果你用 Organizations，可以分析整个组织）</li>
+</ul>
+</li>
+<li>填写名称，比如：<code>MySecurityAnalyzer</code></li>
+</ul>
+<p><img src= "/img/loading.gif" data-src="/images/AWSIAMAccessAnalyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/2.png" alt="image-20250902135210200"></p>
+<hr>
+<h3 id="第三步：查看分析结果"><a href="#第三步：查看分析结果" class="headerlink" title="第三步：查看分析结果"></a>第三步：查看分析结果</h3><ul>
+<li>创建后，Analyzer 会自动开始扫描</li>
+<li>如果检测到有外部访问，会在 <strong>Findings</strong> 列表里显示</li>
+<li>每条 Finding 都有详情，比如：<ul>
+<li>资源类型：S3 Bucket</li>
+<li>外部实体：<code>arn:aws:iam::123456789012:role/ExampleRole</code></li>
+<li>允许的操作：<code>s3:GetObject</code></li>
 </ul>
 </li>
 </ul>
-<p><img src= "/img/loading.gif" data-src="/images/AWSCloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/1.png" alt="image-20250830140216923"></p>
 <hr>
-<h2 id="3️⃣-如何使用-Event-History-查看操作记录"><a href="#3️⃣-如何使用-Event-History-查看操作记录" class="headerlink" title="3️⃣ 如何使用 Event History 查看操作记录"></a>3️⃣ 如何使用 Event History 查看操作记录</h2><ol>
-<li>打开 <strong>CloudTrail 控制台</strong></li>
-<li>左侧菜单 → 点击 <strong>Event history</strong></li>
-<li>在搜索框输入：<ul>
-<li><code>Event name</code>（操作，比如 CreateUser）</li>
-<li><code>Username</code>（谁操作的）</li>
-<li><code>Resource type</code>（资源类型，比如 AWS::EC2::Instance）</li>
+<h2 id="4️⃣-实际应用场景"><a href="#4️⃣-实际应用场景" class="headerlink" title="4️⃣ 实际应用场景"></a>4️⃣ 实际应用场景</h2><ul>
+<li><strong>S3 存储桶是否公开</strong></li>
+<li><strong>IAM 角色是否能被外部 Assume</strong></li>
+<li><strong>KMS 密钥是否被共享给外部账号</strong></li>
+<li><strong>合规审计：证明资源权限受控</strong></li>
 </ul>
-</li>
-</ol>
-<p><img src= "/img/loading.gif" data-src="/images/AWSCloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/2.png" alt="image-20250830140302072"></p>
-<p>👉 解释：点开某条记录，可以看到 <strong>时间戳、来源 IP、请求参数</strong>，这对排查问题特别重要。</p>
 <hr>
-<h2 id="4️⃣-CloudTrail-Trail（长期存储）"><a href="#4️⃣-CloudTrail-Trail（长期存储）" class="headerlink" title="4️⃣ CloudTrail Trail（长期存储）"></a>4️⃣ CloudTrail Trail（长期存储）</h2><p>默认 90 天日志可能不够，所以 AWS 提供 <strong>Trail</strong> 功能：</p>
+<h2 id="5️⃣-最佳实践"><a href="#5️⃣-最佳实践" class="headerlink" title="5️⃣ 最佳实践"></a>5️⃣ 最佳实践</h2><p>✅ 在每个账号里创建至少一个 Analyzer（建议 <strong>全局区域 us-east-1</strong>）<br> ✅ 定期检查 Findings，确认是否是预期行为<br> ✅ 对非预期的 Findings：</p>
 <ul>
-<li>你可以新建一个 <strong>Trail</strong>，把日志存到 <strong>S3 存储桶</strong>，甚至推送到 <strong>CloudWatch Logs</strong></li>
-<li>好处：<ul>
-<li>永久保存</li>
-<li>可以用 Athena&#x2F;Glue 查询日志</li>
-<li>配合 SIEM 系统做安全审计</li>
+<li>修改策略 → 限制访问</li>
+<li>标记为 Resolved（已修复）<br>✅ 配合 <strong>CloudWatch Events</strong>，在检测到新 Findings 时自动触发告警</li>
 </ul>
-</li>
-</ul>
-<p><img src= "/img/loading.gif" data-src="/images/AWSCloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/3.png" alt="image-20250830140411971"></p>
-<hr>
-<h2 id="5️⃣-实际应用场景"><a href="#5️⃣-实际应用场景" class="headerlink" title="5️⃣ 实际应用场景"></a>5️⃣ 实际应用场景</h2><ul>
-<li><strong>安全审计</strong>：谁删除了生产数据库？</li>
-<li><strong>合规要求</strong>：满足 ISO 27001、PCI-DSS、GDPR 等审计需要。</li>
-<li><strong>故障排查</strong>：服务异常时，能快速确认是不是误操作。</li>
-<li><strong>内部追责</strong>：哪个团队成员误删了安全组？</li>
-</ul>
-<hr>
-<h2 id="6️⃣-最佳实践"><a href="#6️⃣-最佳实践" class="headerlink" title="6️⃣ 最佳实践"></a>6️⃣ 最佳实践</h2><p>✅ 始终开启 CloudTrail（默认已经有 Event history）<br> ✅ 建议创建一个 Trail，把日志存到 S3<br> ✅ 给 S3 存储桶加上 <strong>MFA Delete</strong>，防止日志被恶意删除<br> ✅ 配合 <strong>CloudWatch Alarm</strong>，在检测到敏感操作时立即告警</p>
 <hr>
 <h2 id="🔚-总结"><a href="#🔚-总结" class="headerlink" title="🔚 总结"></a>🔚 总结</h2><ul>
-<li>CloudTrail &#x3D; AWS 的黑匣子</li>
-<li>免费的 Event history 就能帮你追踪 90 天内所有操作</li>
-<li>建 Trail 存到 S3，可以满足长期审计和合规要求</li>
-<li>对于企业，CloudTrail 是安全运维必备工具</li>
+<li>IAM Access Analyzer 是 AWS 提供的 <strong>权限体检工具</strong></li>
+<li>它能帮你自动发现“意外对外开放”的资源</li>
+<li>创建 Analyzer 免费，检查结果也免费，非常适合日常安全运维</li>
 </ul>
-<p>📌 <strong>下次你账号出问题，不要慌，先去 CloudTrail 查一查。</strong></p>
 </div>
         
           <div class="post-copyright">
@@ -239,7 +236,7 @@
                       <span> 作者: 王道长</span>
                   </div>
                   <div class="copyright-item">
-                      <span> 链接: <a href="http://example.com/2025/08/30/AWS%20CloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/">http://example.com/2025/08/30/AWS%20CloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/</a></span>
+                      <span> 链接: <a href="http://example.com/2025/09/02/AWS%20IAM%20Access%20Analyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">http://example.com/2025/09/02/AWS%20IAM%20Access%20Analyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/</a></span>
                   </div>
                   <div class="copyright-item">
                       <span> 声明: 本博客所有文章除特别声明外，均采用许可协议 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 转载请注明出处！</span>
@@ -267,13 +264,9 @@
     </div>
     <div class="post-nav">
       
-        <div class="post-nav-prev post-nav-item">
-            <a href="/2025/09/02/AWS%20IAM%20Access%20Analyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/" >AWS IAM Access Analyzer：权限分析实战<i class="fa fa-chevron-left"></i></a>
-        </div>
-      
       
         <div class="post-nav-next post-nav-item">
-            <a href="/2025/08/28/S3%20%E5%AD%98%E5%82%A8%E6%A1%B6%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E8%AF%AF%E5%85%AC%E5%BC%80/" >S3 存储桶权限配置实战：如何防止数据误公开<i class="fa fa-chevron-right"></i></a>
+            <a href="/2025/08/30/AWS%20CloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/" >AWS CloudTrail：操作日志审计全攻略<i class="fa fa-chevron-right"></i></a>
         </div>
       
     </div>
