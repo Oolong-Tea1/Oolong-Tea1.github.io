@@ -161,22 +161,9 @@
         </div>
           <div class="content">
             
-              <p><img src="/img/loading.gif" data-src="/images/AWSIAMAccessAnalyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/0.jpeg" alt="image (41)"></p>
+              <p><img src="/images/AWSIAMAccessAnalyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/0.jpeg" alt="image (41)"></p>
 <p>在云上运维中，安全的核心是 <strong>权限控制</strong>。<br> 即便我们给资源加了 IAM 策略或安全组，也难以确认 <strong>“是不是意外对外开放了？”</strong>。</p>
 <p>AWS 提供的 <strong>IAM Access Analyzer</strong> 就是用来解决这个问题的 —— 它能自动分析账号中的 IAM 策略，告诉你资源是否被外部实体访问。</p>
-<hr>
-<h2 id="1️⃣-什么是-IAM-Access-Analyzer？"><a href="#1️⃣-什么是-IAM-Access-Analyzer？" class="headerlink" title="1️⃣ 什么是 IAM Access Analyzer？"></a>1️⃣ 什么是 IAM Access Analyzer？</h2><ul>
-<li>IAM Access Analyzer 是 AWS 提供的 <strong>自动化权限分析工具</strong></li>
-<li>它会扫描你的 <strong>IAM 策略</strong>，检查是否允许外部访问（比如：<ul>
-<li>S3 存储桶对所有人可读？</li>
-<li>KMS 密钥是否被外部账号使用？</li>
-<li>IAM 角色是否能被第三方 Assume？</li>
-</ul>
-</li>
-</ul>
-<p>📌 一句话：Access Analyzer &#x3D; 帮你找出“资源是否被外部共享”。</p>
-<hr>
-<h2 id="2️⃣-支持的资源类型"><a href="#2️⃣-支持的资源类型" class="headerlink" title="2️⃣ 支持的资源类型"></a>2️⃣ 支持的资源类型</h2><p>目前 IAM Access Analyzer 能分析的资源包括：</p>
              
           </div>
         </div>
@@ -207,28 +194,8 @@
         </div>
           <div class="content">
             
-              <p><img src="/img/loading.gif" data-src="/images/AWSCloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/0.jpeg" alt="0"></p>
+              <p><img src="/images/AWSCloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/0.jpeg" alt="0"></p>
 <p>在 AWS 中，安全不仅仅是防止黑客攻击，更重要的是 <strong>“知道谁在你的账号里做了什么”</strong>。<br> 这就是 <strong>CloudTrail</strong> 的作用 —— 它记录你账号里所有的 API 调用和控制台操作，是 AWS 的“黑匣子”。</p>
-<hr>
-<h2 id="1️⃣-什么是-CloudTrail？"><a href="#1️⃣-什么是-CloudTrail？" class="headerlink" title="1️⃣ 什么是 CloudTrail？"></a>1️⃣ 什么是 CloudTrail？</h2><ul>
-<li>CloudTrail &#x3D; <strong>操作日志审计服务</strong></li>
-<li>它会记录：<ul>
-<li>谁（用户&#x2F;角色&#x2F;服务）</li>
-<li>在什么时候</li>
-<li>在哪个区域</li>
-<li>对哪个资源</li>
-<li>执行了什么操作</li>
-</ul>
-</li>
-</ul>
-<p>📌 举例：</p>
-<ul>
-<li>你在控制台 <strong>创建了一个安全组</strong> → CloudTrail 会记录“CreateSecurityGroup”事件</li>
-<li>你用 CLI 执行 <code>aws s3 ls</code> → CloudTrail 会记录“ListBuckets”事件</li>
-</ul>
-<p>👉 换句话说，CloudTrail &#x3D; AWS 的“监控摄像头”。</p>
-<hr>
-<h2 id="2️⃣-CloudTrail-默认记录什么？"><a href="#2️⃣-CloudTrail-默认记录什么？" class="headerlink" title="2️⃣ CloudTrail 默认记录什么？"></a>2️⃣ CloudTrail 默认记录什么？</h2>
              
           </div>
         </div>
