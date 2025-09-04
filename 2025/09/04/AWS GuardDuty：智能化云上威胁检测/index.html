@@ -24,7 +24,7 @@
 
   
 
-  <title>AWS IAM Access Analyzer：权限分析实战 | 王道长服务器 | 亚马逊云</title>
+  <title>AWS GuardDuty：智能化云上威胁检测 | 王道长服务器 | 亚马逊云</title>
 
   
 
@@ -138,7 +138,7 @@
 
     
 <article id="post">
-  <div class="post-title">AWS IAM Access Analyzer：权限分析实战</div>
+  <div class="post-title">AWS GuardDuty：智能化云上威胁检测</div>
   
 <div class="post-meta">
     
@@ -147,7 +147,7 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">559 字</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">712 字</span>
            
         
           <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
@@ -159,78 +159,71 @@
 
   
   <div class="content">
-        <div><p><img src= "/img/loading.gif" data-src="/images/AWSIAMAccessAnalyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/0.jpeg" alt="image (41)"></p>
-<p>在云上运维中，安全的核心是 <strong>权限控制</strong>。<br> 即便我们给资源加了 IAM 策略或安全组，也难以确认 <strong>“是不是意外对外开放了？”</strong>。</p>
-<p>AWS 提供的 <strong>IAM Access Analyzer</strong> 就是用来解决这个问题的 —— 它能自动分析账号中的 IAM 策略，告诉你资源是否被外部实体访问。</p>
+        <div><h1 id="AWS-GuardDuty：智能化云上威胁检测"><a href="#AWS-GuardDuty：智能化云上威胁检测" class="headerlink" title="AWS GuardDuty：智能化云上威胁检测"></a>AWS GuardDuty：智能化云上威胁检测</h1><p><img src= "/img/loading.gif" data-src="/images/AWSGuardDuty%EF%BC%9A%E6%99%BA%E8%83%BD%E5%8C%96%E4%BA%91%E4%B8%8A%E5%A8%81%E8%83%81%E6%A3%80%E6%B5%8B/0.png" alt="image (42)"></p>
+<p>在传统 IT 环境中，企业通常依赖防火墙、IDS&#x2F;IPS、安全日志分析等手段来保障安全。但在云计算时代，攻击方式更加隐蔽且复杂，仅靠人工排查日志几乎不可能实时发现风险。这时候，AWS 提供的 <strong>GuardDuty</strong> 就成了非常实用的安全工具。</p>
+<p>它不需要你部署任何探针，只要开启，就能自动帮你监控云上环境，发现潜在的安全威胁。</p>
 <span id="more"></span>
 
 <hr>
-<h2 id="1️⃣-什么是-IAM-Access-Analyzer？"><a href="#1️⃣-什么是-IAM-Access-Analyzer？" class="headerlink" title="1️⃣ 什么是 IAM Access Analyzer？"></a>1️⃣ 什么是 IAM Access Analyzer？</h2><ul>
-<li>IAM Access Analyzer 是 AWS 提供的 <strong>自动化权限分析工具</strong></li>
-<li>它会扫描你的 <strong>IAM 策略</strong>，检查是否允许外部访问（比如：<ul>
-<li>S3 存储桶对所有人可读？</li>
-<li>KMS 密钥是否被外部账号使用？</li>
-<li>IAM 角色是否能被第三方 Assume？</li>
-</ul>
-</li>
-</ul>
-<p>📌 一句话：Access Analyzer &#x3D; 帮你找出“资源是否被外部共享”。</p>
-<hr>
-<h2 id="2️⃣-支持的资源类型"><a href="#2️⃣-支持的资源类型" class="headerlink" title="2️⃣ 支持的资源类型"></a>2️⃣ 支持的资源类型</h2><p>目前 IAM Access Analyzer 能分析的资源包括：</p>
+<h2 id="一、什么是-GuardDuty？"><a href="#一、什么是-GuardDuty？" class="headerlink" title="一、什么是 GuardDuty？"></a>一、什么是 GuardDuty？</h2><p>GuardDuty 是 AWS 的 <strong>威胁检测服务</strong>，通过分析多种数据源（例如 <strong>VPC 流日志、CloudTrail 日志、DNS 日志</strong>），结合 AWS 的威胁情报和机器学习算法，帮助用户检测异常活动。</p>
+<p>你可以把它理解为 <strong>“AWS 自带的智能安全顾问”</strong>：</p>
 <ul>
-<li><strong>S3 存储桶</strong></li>
-<li><strong>IAM 角色</strong></li>
-<li><strong>KMS 密钥</strong></li>
-<li><strong>Lambda 函数 &amp; Layer</strong></li>
-<li><strong>SQS 队列</strong></li>
-<li><strong>Secrets Manager</strong></li>
+<li>无需安装或运维任何安全软件</li>
+<li>一键启用，自动分析日志</li>
+<li>自动生成告警，分类威胁级别（低、中、高）</li>
 </ul>
 <hr>
-<h2 id="3️⃣-如何使用-IAM-Access-Analyzer"><a href="#3️⃣-如何使用-IAM-Access-Analyzer" class="headerlink" title="3️⃣ 如何使用 IAM Access Analyzer"></a>3️⃣ 如何使用 IAM Access Analyzer</h2><h3 id="第一步：进入控制台"><a href="#第一步：进入控制台" class="headerlink" title="第一步：进入控制台"></a>第一步：进入控制台</h3><ul>
-<li>打开 <strong>IAM 控制台</strong> → 左侧选择 <strong>Access Analyzer</strong></li>
-</ul>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAMAccessAnalyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/1.png" alt="image-20250902135128882"></p>
-<hr>
-<h3 id="第二步：创建-Analyzer"><a href="#第二步：创建-Analyzer" class="headerlink" title="第二步：创建 Analyzer"></a>第二步：创建 Analyzer</h3><ul>
-<li>点击 <strong>Create analyzer</strong></li>
-<li>选择类型：<ul>
-<li><strong>Account</strong>（分析整个账号的外部访问）</li>
-<li><strong>Organization</strong>（如果你用 Organizations，可以分析整个组织）</li>
+<h2 id="二、GuardDuty-能发现什么？"><a href="#二、GuardDuty-能发现什么？" class="headerlink" title="二、GuardDuty 能发现什么？"></a>二、GuardDuty 能发现什么？</h2><p>常见的威胁检测场景包括：</p>
+<ol>
+<li><strong>异常 API 调用</strong><ul>
+<li>例如一个 IAM 用户突然从国外发起 Root 账号操作。</li>
 </ul>
 </li>
-<li>填写名称，比如：<code>MySecurityAnalyzer</code></li>
-</ul>
-<p><img src= "/img/loading.gif" data-src="/images/AWSIAMAccessAnalyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/2.png" alt="image-20250902135210200"></p>
-<hr>
-<h3 id="第三步：查看分析结果"><a href="#第三步：查看分析结果" class="headerlink" title="第三步：查看分析结果"></a>第三步：查看分析结果</h3><ul>
-<li>创建后，Analyzer 会自动开始扫描</li>
-<li>如果检测到有外部访问，会在 <strong>Findings</strong> 列表里显示</li>
-<li>每条 Finding 都有详情，比如：<ul>
-<li>资源类型：S3 Bucket</li>
-<li>外部实体：<code>arn:aws:iam::123456789012:role/ExampleRole</code></li>
-<li>允许的操作：<code>s3:GetObject</code></li>
+<li><strong>潜在的数据泄露</strong><ul>
+<li>检测到 S3 存储桶被异常访问。</li>
 </ul>
 </li>
+<li><strong>网络攻击行为</strong><ul>
+<li>检测到某个 EC2 实例对外大规模扫描端口。</li>
 </ul>
-<hr>
-<h2 id="4️⃣-实际应用场景"><a href="#4️⃣-实际应用场景" class="headerlink" title="4️⃣ 实际应用场景"></a>4️⃣ 实际应用场景</h2><ul>
-<li><strong>S3 存储桶是否公开</strong></li>
-<li><strong>IAM 角色是否能被外部 Assume</strong></li>
-<li><strong>KMS 密钥是否被共享给外部账号</strong></li>
-<li><strong>合规审计：证明资源权限受控</strong></li>
+</li>
+<li><strong>恶意 IP&#x2F;域名访问</strong><ul>
+<li>发现某个实例正在与已知的恶意域名通信。</li>
 </ul>
+</li>
+</ol>
+<p>这些情况，在传统模式下需要人工长时间排查，但 GuardDuty 可以在几分钟内发现并推送告警。</p>
 <hr>
-<h2 id="5️⃣-最佳实践"><a href="#5️⃣-最佳实践" class="headerlink" title="5️⃣ 最佳实践"></a>5️⃣ 最佳实践</h2><p>✅ 在每个账号里创建至少一个 Analyzer（建议 <strong>全局区域 us-east-1</strong>）<br> ✅ 定期检查 Findings，确认是否是预期行为<br> ✅ 对非预期的 Findings：</p>
+<h2 id="三、如何开启-GuardDuty？"><a href="#三、如何开启-GuardDuty？" class="headerlink" title="三、如何开启 GuardDuty？"></a>三、如何开启 GuardDuty？</h2><p>开启步骤非常简单：</p>
+<ol>
+<li><p>登录 AWS 控制台 → 搜索 <strong>GuardDuty</strong></p>
+<p><img src= "/img/loading.gif" data-src="/images/AWSGuardDuty%EF%BC%9A%E6%99%BA%E8%83%BD%E5%8C%96%E4%BA%91%E4%B8%8A%E5%A8%81%E8%83%81%E6%A3%80%E6%B5%8B/1.png" alt="image-20250904104820779"></p>
+</li>
+<li><p>点击 <strong>启用 GuardDuty</strong>（Enable GuardDuty）</p>
+<p><img src= "/img/loading.gif" data-src="/images/AWSGuardDuty%EF%BC%9A%E6%99%BA%E8%83%BD%E5%8C%96%E4%BA%91%E4%B8%8A%E5%A8%81%E8%83%81%E6%A3%80%E6%B5%8B/2.png" alt="image-20250904104916046"></p>
+</li>
+<li><p>等待数分钟，它会自动开始分析你账户下的日志数据</p>
+</li>
+<li><p>在 <strong>Findings（检测结果）</strong> 中查看安全告警</p>
+<p><img src= "/img/loading.gif" data-src="/images/AWSGuardDuty%EF%BC%9A%E6%99%BA%E8%83%BD%E5%8C%96%E4%BA%91%E4%B8%8A%E5%A8%81%E8%83%81%E6%A3%80%E6%B5%8B/3.png" alt="aws.amazon.com/blogs/aws..."></p>
+</li>
+</ol>
+<p>（这里你可以截图控制台界面，非常直观）</p>
+<hr>
+<h2 id="四、与其他服务联动"><a href="#四、与其他服务联动" class="headerlink" title="四、与其他服务联动"></a>四、与其他服务联动</h2><p>GuardDuty 的价值不仅在于检测，还在于 <strong>可以与 AWS 的其他服务联动，实现自动化安全响应</strong>。</p>
 <ul>
-<li>修改策略 → 限制访问</li>
-<li>标记为 Resolved（已修复）<br>✅ 配合 <strong>CloudWatch Events</strong>，在检测到新 Findings 时自动触发告警</li>
+<li><strong>CloudWatch Event</strong>：将威胁告警转为事件，自动触发处理流程</li>
+<li><strong>Lambda 函数</strong>：收到威胁后，自动执行脚本（比如封禁恶意 IP）</li>
+<li><strong>Security Hub</strong>：集中管理多种安全告警，统一安全态势视图</li>
 </ul>
+<p>这样一来，企业可以做到 <strong>发现问题 → 自动化处理 → 安全闭环</strong>。</p>
 <hr>
-<h2 id="🔚-总结"><a href="#🔚-总结" class="headerlink" title="🔚 总结"></a>🔚 总结</h2><ul>
-<li>IAM Access Analyzer 是 AWS 提供的 <strong>权限体检工具</strong></li>
-<li>它能帮你自动发现“意外对外开放”的资源</li>
-<li>创建 Analyzer 免费，检查结果也免费，非常适合日常安全运维</li>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><p>AWS GuardDuty 是一种 <strong>即开即用、无需运维</strong> 的安全威胁检测服务，特别适合：</p>
+<ul>
+<li>中小企业：没有安全团队，也能享受企业级安全监控</li>
+<li>大型企业：与自动化运维结合，构建智能安全体系</li>
 </ul>
+<p>一句话总结：<br> <strong>有了 GuardDuty，你的云上资产就像随时有人在帮你“盯梢”，遇到可疑情况第一时间告诉你。</strong></p>
 </div>
         
           <div class="post-copyright">
@@ -238,7 +231,7 @@
                       <span> 作者: 王道长</span>
                   </div>
                   <div class="copyright-item">
-                      <span> 链接: <a href="http://example.com/2025/09/02/AWS%20IAM%20Access%20Analyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">http://example.com/2025/09/02/AWS%20IAM%20Access%20Analyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/</a></span>
+                      <span> 链接: <a href="http://example.com/2025/09/04/AWS%20GuardDuty%EF%BC%9A%E6%99%BA%E8%83%BD%E5%8C%96%E4%BA%91%E4%B8%8A%E5%A8%81%E8%83%81%E6%A3%80%E6%B5%8B/">http://example.com/2025/09/04/AWS%20GuardDuty%EF%BC%9A%E6%99%BA%E8%83%BD%E5%8C%96%E4%BA%91%E4%B8%8A%E5%A8%81%E8%83%81%E6%A3%80%E6%B5%8B/</a></span>
                   </div>
                   <div class="copyright-item">
                       <span> 声明: 本博客所有文章除特别声明外，均采用许可协议 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 转载请注明出处！</span>
@@ -266,13 +259,9 @@
     </div>
     <div class="post-nav">
       
-        <div class="post-nav-prev post-nav-item">
-            <a href="/2025/09/04/AWS%20GuardDuty%EF%BC%9A%E6%99%BA%E8%83%BD%E5%8C%96%E4%BA%91%E4%B8%8A%E5%A8%81%E8%83%81%E6%A3%80%E6%B5%8B/" >AWS GuardDuty：智能化云上威胁检测<i class="fa fa-chevron-left"></i></a>
-        </div>
-      
       
         <div class="post-nav-next post-nav-item">
-            <a href="/2025/08/30/AWS%20CloudTrail%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1%E5%85%A8%E6%94%BB%E7%95%A5/" >AWS CloudTrail：操作日志审计全攻略<i class="fa fa-chevron-right"></i></a>
+            <a href="/2025/09/02/AWS%20IAM%20Access%20Analyzer%EF%BC%9A%E6%9D%83%E9%99%90%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/" >AWS IAM Access Analyzer：权限分析实战<i class="fa fa-chevron-right"></i></a>
         </div>
       
     </div>
